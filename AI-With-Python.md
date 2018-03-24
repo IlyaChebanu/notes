@@ -54,3 +54,50 @@ This can be done using
 ```python
 data_scaled_minmax = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(input_data)
 ```
+
+#### Normalization
+
+- **L1 normalization** refers to Least Absolute Deviations, making sure the sum of absolute values is 1 in each row.
+- **L2 normalization** refers to least squares, making sure that the sum of squares is 1.
+
+L1 is more resistant to outliers in the data. Where outliers are important, L2 becomes a better choice.
+
+```python
+# L1 Normalization
+l1_normalized = preprocessing.normalize(input_data, norm='l1')
+# L2 Normalization
+l2_normalized = preprocessing.normalize(input_data, norm='l2')
+```
+
+### Label encoding
+
+In the real world, labels tend to be words. sklearn excepts labels to be numbers.
+```python
+encoder = preprocessing.LabelEncoder()
+encoder.fit(input_labels)
+```
+To encode a set of labels
+```python
+test_labels = ['a', 'c', 'b']
+encoder.transform(test_labels)
+```
+To decode a set of numbers
+```python
+encoded_values = [2, 3, 1]
+encoder.inverse_transform(encoded_values)
+```
+
+### Logistic regression classifier
+
+Technique to explain the relationship between input and output variables.
+Input variables assumed to be independent.
+Output variables referred to as dependent variables.
+The dependent variable can only take a fixed set of values which correspond to the classes.
+
+Goal: Identify the relationship between the independent and dependent variables by estimating the probabilities using a **sigmoid curve** (logistic function).
+
+```python
+classifier = linear_model.LogisticRegression(solver='liblinear', C=1)
+```
+**C** imposes a penalty on misclassification. if the C is set too high the model will overfit to the training data.
+
