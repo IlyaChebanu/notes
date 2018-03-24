@@ -29,3 +29,28 @@ Preprocessing techniques include:
 - Scaling
 - Normalization
 
+#### Binarization
+
+Converting numerical values into boolean values.
+`sklearn.preprocessing` module provides a `Binarizer` class to do so. eg:
+```python
+data_binarized = preprocessing.Binarizer(threshold=2.1).transform(input_data)
+```
+This will turn the values above 2.1 to a 1, and everything else to a 0.
+
+#### Mean removal
+
+Moving the mean as close to 0 as possible.
+
+It's useful to remove the mean from the feature vector, so that each feature is centered on zero. This is done to remove bias from the features. eg:
+```python
+data_scaled = preprocessing.scale(input_data)
+```
+
+#### Scaling
+
+It is important to scale features to that there is a level playing field for the algorithm to train on. We don't want a feature to become an outlier just because of the nature of the measurement.
+This can be done using
+```python
+data_scaled_minmax = preprocessing.MinMaxScaler(feature_range=(0, 1)).fit_transform(input_data)
+```
