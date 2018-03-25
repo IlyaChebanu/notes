@@ -92,3 +92,4 @@ Solution:
 <=>
 
 <img src="https://latex.codecogs.com/png.latex?\\x=-2y&plus;3z&plus;4&space;\\y&space;=&space;1y&space;&plus;&space;0z&space;&plus;&space;0&space;\\z&space;=&space;0y&space;&plus;&space;1z&space;&plus;&space;0&space;\\&space;\\\Rightarrow&space;\begin{bmatrix}&space;x\\&space;y\\&space;z&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;4\\&space;0\\&space;0&space;\end{bmatrix}&space;&plus;&space;y\begin{bmatrix}&space;-2\\&space;1\\&space;0&space;\end{bmatrix}&space;&plus;&space;z\begin{bmatrix}&space;3\\&space;0\\&space;1&space;\end{bmatrix}" title="\\x=-2y+3z+4 \\y = 1y + 0z + 0 \\z = 0y + 1z + 0 \\ \\\Rightarrow \begin{bmatrix} x\\ y\\ z \end{bmatrix} = \begin{bmatrix} 4\\ 0\\ 0 \end{bmatrix} + y\begin{bmatrix} -2\\ 1\\ 0 \end{bmatrix} + z\begin{bmatrix} 3\\ 0\\ 1 \end{bmatrix}" />
+
