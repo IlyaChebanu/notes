@@ -126,3 +126,22 @@ If <img src="https://latex.codecogs.com/png.latex?P" title="P" /> is the plane i
 The point on the plane nearest to v is v' given by
 
 <img src="https://latex.codecogs.com/png.latex?v'&space;=&space;\left&space;\langle&space;v,&space;u_1&space;\right&space;\rangle&space;u_1&space;&plus;&space;\left&space;\langle&space;v,&space;u_2&space;\right&space;\rangle&space;u_2" title="v' = \left \langle v, u_1 \right \rangle u_1 + \left \langle v, u_2 \right \rangle u_2" />
+
+### 2017 Question 1
+
+**(a)** Write down the equation of the plane in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> that passes through the point p and is normal to the vector n, where:
+
+<img src="https://latex.codecogs.com/png.latex?p&space;=&space;\begin{bmatrix}&space;1\\&space;3\\&space;-2&space;\end{bmatrix}&space;\&space;and&space;\&space;n&space;=&space;\begin{bmatrix}&space;2\\&space;-1\\&space;5\\&space;\end{bmatrix}" title="p = \begin{bmatrix} 1\\ 3\\ -2 \end{bmatrix} \ and \ n = \begin{bmatrix} 2\\ -1\\ 5\\ \end{bmatrix}" />
+
+The equation for a plane is in the form <img src="https://latex.codecogs.com/png.latex?ax&space;&plus;&space;by&space;&plus;&space;cz&space;&plus;&space;d&space;=&space;0" title="ax + by + cz + d = 0" />
+
+The formula to solve this question is:
+
+<img src="https://latex.codecogs.com/png.latex?a(x-x_0)&space;&plus;&space;b(y-y_0)&space;&plus;&space;c(z-z_0)&space;=&space;0" title="a(x-x_0) + b(y-y_0) + c(z-z_0) = 0" />
+
+x0, y0, z0 correspond to the x,y,z of the point p
+a, b, c correspond to the x,y,z of the normal n
+
+Inputting the values into the formula we get
+
+<img src="https://latex.codecogs.com/png.latex?\\2(x-1)&space;-1(y-3)&space;&plus;&space;5(z&plus;2)&space;=&space;0&space;\\\iff&space;2x-2-y-3&plus;5z&plus;10=0&space;\\\iff&space;2x-y&plus;5z&plus;5=0" title="\\2(x-1) -1(y-3) + 5(z+2) = 0 \\\iff 2x-2-y-3+5z+10=0 \\\iff 2x-y+5z+5=0" />
