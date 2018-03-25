@@ -44,4 +44,11 @@ Find the angle between the vectors
 
 To find the constant <img src="https://latex.codecogs.com/png.latex?\alpha&space;\in&space;\mathbb{R}" title="\alpha \in \mathbb{R}" /> and the vector <img src="https://latex.codecogs.com/png.latex?x^\perp" title="x^\perp" /> which is perpendicular to the unit vector u such that <img src="https://latex.codecogs.com/png.latex?x&space;=&space;au&space;&plus;&space;x^\perp" title="x = au + x^\perp" />
 
-<img src="https://latex.codecogs.com/png.latex?a&space;=&space;\left&space;\langle&space;x,u&space;\right&space;\rangle" title="a = \left \langle x,u \right \rangle" />
+=> <img src="https://latex.codecogs.com/png.latex?\left&space;\langle&space;x,&space;u&space;\right&space;\rangle&space;=&space;a\left&space;\langle&space;u,&space;u&space;\right&space;\rangle&space;&plus;&space;\left&space;\langle&space;x^\perp&space;,u\right&space;\rangle" title="\left \langle x, u \right \rangle = a\left \langle u, u \right \rangle + \left \langle x^\perp ,u\right \rangle" />
+
+=> <img src="https://latex.codecogs.com/png.latex?a&space;=&space;\left&space;\langle&space;x,u&space;\right&space;\rangle" title="a = \left \langle x,u \right \rangle" />
+
+To find <img src="https://latex.codecogs.com/png.latex?x^\perp" title="x^\perp" />, 
+
+<img src="https://latex.codecogs.com/png.latex?x&space;=&space;au&space;&plus;&space;x^\perp" title="x = au + x^\perp" />
+<img src="https://latex.codecogs.com/png.latex?x^\perp&space;=&space;x&space;-&space;au" title="x^\perp = x - au" />
