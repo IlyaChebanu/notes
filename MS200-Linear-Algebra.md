@@ -67,8 +67,8 @@ Solution:
 <=>
 <img src="https://latex.codecogs.com/png.latex?\\x&space;=&space;4y&space;&plus;&space;4\\&space;y&space;=&space;0&space;&plus;&space;1y" title="\\x = 4y + 4\\ y = 0 + 1y" />
 <=>
-<img src="https://latex.codecogs.com/png.latex?\begin{bmatrix}&space;x\\&space;y&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;4\\&space;0&space;\end{bmatrix}&space;&plus;&space;y\begin{bmatrix}&space;3\\&space;1&space;\end{bmatrix}" title="\begin{bmatrix} x\\ y \end{bmatrix} = \begin{bmatrix} 4\\ 0 \end{bmatrix} + y\begin{bmatrix} 3\\ 1 \end{bmatrix}" />
+<img src="https://latex.codecogs.com/png.latex?\begin{bmatrix}&space;x\\&space;y&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;4\\&space;0&space;\end{bmatrix}&space;&plus;&space;y\begin{bmatrix}&space;4\\&space;1&space;\end{bmatrix}" title="\begin{bmatrix} x\\ y \end{bmatrix} = \begin{bmatrix} 4\\ 0 \end{bmatrix} + y\begin{bmatrix} 4\\ 1 \end{bmatrix}" />
 
 That is, the line <img src="https://latex.codecogs.com/png.latex?2x&space;-&space;8y&space;=&space;4" title="2x - 8y = 4" /> is parametrized by the map
 
-<img src="https://latex.codecogs.com/png.latex?\gamma&space;:\mathbb{R}&space;\rightarrow&space;\mathbb{R}^2:y&space;\mapsto&space;\gamma(y)&space;=&space;\begin{bmatrix}&space;4\\&space;0&space;\end{bmatrix}&space;&plus;&space;y&space;\begin{bmatrix}&space;3\\&space;1&space;\end{bmatrix}" title="\gamma :\mathbb{R} \rightarrow \mathbb{R}^2:y \mapsto \gamma(y) = \begin{bmatrix} 4\\ 0 \end{bmatrix} + y \begin{bmatrix} 3\\ 1 \end{bmatrix}" />
+<img src="https://latex.codecogs.com/png.latex?\gamma&space;:\mathbb{R}&space;\rightarrow&space;\mathbb{R}^2:y&space;\mapsto&space;\gamma(y)&space;=&space;\begin{bmatrix}&space;4\\&space;0&space;\end{bmatrix}&space;&plus;&space;y&space;\begin{bmatrix}&space;4\\&space;1&space;\end{bmatrix}" title="\gamma :\mathbb{R} \rightarrow \mathbb{R}^2:y \mapsto \gamma(y) = \begin{bmatrix} 4\\ 0 \end{bmatrix} + y \begin{bmatrix} 4\\ 1 \end{bmatrix}" />
