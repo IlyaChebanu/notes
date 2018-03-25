@@ -52,3 +52,17 @@ To find <img src="https://latex.codecogs.com/png.latex?x^\perp" title="x^\perp" 
 
 <img src="https://latex.codecogs.com/png.latex?x&space;=&space;au&space;&plus;&space;x^\perp" title="x = au + x^\perp" />
 <img src="https://latex.codecogs.com/png.latex?x^\perp&space;=&space;x&space;-&space;au" title="x^\perp = x - au" />
+
+## Class test stuff
+### Parametrizing lines
+
+**2016 Question 1**
+Parametrize the line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^2" title="\mathbb{R}^2" /> given by the equation <img src="https://latex.codecogs.com/png.latex?2x&space;-&space;8y&space;=&space;4" title="2x - 8y = 4" />
+
+Solution:
+
+<img src="https://latex.codecogs.com/png.latex?2x&space;-&space;8y&space;=&space;4" title="2x - 8y = 4" />
+<=>
+<img src="https://latex.codecogs.com/png.latex?&space;2x&space;=&space;8y&space;&plus;&space;4" title="2x = 8y + 4" />
+<=>
+<img src="https://latex.codecogs.com/png.latex?\\x&space;=&space;4y&space;&plus;&space;4\\&space;y&space;=&space;0&space;&plus;&space;1y" title="\\x = 4y + 4\\ y = 0 + 1y" />
