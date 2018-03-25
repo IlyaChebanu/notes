@@ -54,9 +54,8 @@ To find <img src="https://latex.codecogs.com/png.latex?x^\perp" title="x^\perp" 
 <img src="https://latex.codecogs.com/png.latex?x^\perp&space;=&space;x&space;-&space;au" title="x^\perp = x - au" />
 
 ## Class test stuff
-### Parametrizing lines
 
-**2016 Question 1**
+### 2016 Question 1
 Parametrize the line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^2" title="\mathbb{R}^2" /> given by the equation <img src="https://latex.codecogs.com/png.latex?2x&space;-&space;8y&space;=&space;4" title="2x - 8y = 4" />
 
 Solution:
@@ -81,7 +80,7 @@ Parametrize the line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R
 <img src="https://latex.codecogs.com/png.latex?\\\gamma:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto\gamma(t)&space;=&space;p&space;&plus;&space;t(q-p)\\\\=\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix}&space;&plus;&space;t\begin{bmatrix}&space;3-1\\&space;-1-0\\&space;5&plus;2&space;\end{bmatrix}\\\\\\&space;=\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix}&plus;t\begin{bmatrix}&space;2\\&space;-1\\&space;7&space;\end{bmatrix}" title="\\\gamma:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto\gamma(t) = p + t(q-p)\\\\=\begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix} + t\begin{bmatrix} 3-1\\ -1-0\\ 5+2 \end{bmatrix}\\\\\\ =\begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix}+t\begin{bmatrix} 2\\ -1\\ 7 \end{bmatrix}" />
 
 
-**2016 Question 2**
+### 2016 Question 2
 
 **(a)**
 Parametrize the plane in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> given by the equation: <img src="https://latex.codecogs.com/png.latex?x&plus;2y-3z=4" title="x+2y-3z=4" />
@@ -109,3 +108,21 @@ The direction of the line <img src="https://latex.codecogs.com/png.latex?\begin{
 To get the point of intersection we sub in x(t), y(t), z(t) for x, y, z in the line's equation. Therefore;
 
 <img src="https://latex.codecogs.com/png.latex?\\line&space;\&space;intersects&space;\&space;plane&space;\iff&space;(1&plus;t)&space;&plus;&space;2(1&plus;2t)-3(-2-3t)&space;=&space;4&space;\\\iff&space;t&space;=&space;-\frac{5}{14}&space;\\&space;so&space;\&space;the&space;\&space;point&space;\&space;of&space;\&space;intersection&space;=&space;l(-\frac{5}{14})&space;=&space;\begin{bmatrix}&space;1\\&space;1\\&space;-2&space;\end{bmatrix}&space;-&space;\frac{5}{14}\begin{bmatrix}&space;1\\&space;2\\&space;-3&space;\end{bmatrix}" title="\\line \ intersects \ plane \iff (1+t) + 2(1+2t)-3(-2-3t) = 4 \\\iff t = -\frac{5}{14} \\ so \ the \ point \ of \ intersection = l(-\frac{5}{14}) = \begin{bmatrix} 1\\ 1\\ -2 \end{bmatrix} - \frac{5}{14}\begin{bmatrix} 1\\ 2\\ -3 \end{bmatrix}" />
+
+
+### 2016 Question 
+
+<img src="https://latex.codecogs.com/png.latex?u_1&space;=&space;\frac{1}{\sqrt{2}}\begin{bmatrix}&space;0\\&space;1\\&space;1&space;\end{bmatrix},&space;\&space;u_2&space;=&space;\frac{1}{3}\begin{bmatrix}&space;1\\&space;-2\\&space;2&space;\end{bmatrix},&space;\&space;and&space;\&space;v&space;=&space;\begin{bmatrix}&space;3\\&space;2\\&space;1&space;\end{bmatrix}" title="u_1 = \frac{1}{\sqrt{2}}\begin{bmatrix} 0\\ 1\\ 1 \end{bmatrix}, \ u_2 = \frac{1}{3}\begin{bmatrix} 1\\ -2\\ 2 \end{bmatrix}, \ and \ v = \begin{bmatrix} 3\\ 2\\ 1 \end{bmatrix}" />
+
+**(a)** Show that the set of vectors <img src="https://latex.codecogs.com/png.latex?\{u_1,&space;u_2\}" title="\{u_1, u_2\}" /> is an orthonormal set.
+
+A set of vectors is orthonormal if they are orthogonal and unit vectors.
+
+<img src="https://latex.codecogs.com/png.latex?\\\left&space;\langle&space;u_1,&space;u_2&space;\right&space;\rangle&space;=&space;0&space;\\\left&space;\|&space;u_1&space;\right&space;\|^2&space;=&space;1&space;\\\left&space;\|&space;u_2&space;\right&space;\|&space;=&space;1" title="\\\left \langle u_1, u_2 \right \rangle = 0 \\\left \| u_1 \right \|^2 = 1 \\\left \| u_2 \right \| = 1" />
+
+**(b)**
+If <img src="https://latex.codecogs.com/png.latex?P" title="P" /> is the plane in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> which passes through the origin and contains the set of vectors <img src="https://latex.codecogs.com/png.latex?\{u_1,&space;u_2\}" title="\{u_1, u_2\}" />, find the point on <img src="https://latex.codecogs.com/png.latex?P" title="P" /> that is nearest to <img src="https://latex.codecogs.com/png.latex?v" title="v" />
+
+The point on the plane nearest to v is v' given by
+
+<img src="https://latex.codecogs.com/png.latex?v'&space;=&space;\left&space;\langle&space;v,&space;u_1&space;\right&space;\rangle&space;u_1&space;&plus;&space;\left&space;\langle&space;v,&space;u_2&space;\right&space;\rangle&space;u_2" title="v' = \left \langle v, u_1 \right \rangle u_1 + \left \langle v, u_2 \right \rangle u_2" />
