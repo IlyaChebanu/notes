@@ -32,10 +32,16 @@ Find the angle between the vectors
 <img src="https://latex.codecogs.com/png.latex?x&space;=&space;\begin{bmatrix}&space;1\\&space;2\\&space;-1&space;\end{bmatrix}&space;,y&space;=&space;\begin{bmatrix}&space;2\\&space;1\\&space;1&space;\end{bmatrix}" title="x = \begin{bmatrix} 1\\ 2\\ -1 \end{bmatrix} ,y = \begin{bmatrix} 2\\ 1\\ 1 \end{bmatrix}" />
 
 <img src="https://latex.codecogs.com/png.latex?\left&space;\|&space;x&space;\right&space;\|&space;=&space;\sqrt{6}" title="\left \| x \right \| = \sqrt{6}" />
-<img src="https://latex.codecogs.com/png.latex?\left&space;\|&space;x&space;\right&space;\|&space;=&space;\sqrt{6}" title="\left \| y \right \| = \sqrt{6}" />
+<img src="https://latex.codecogs.com/png.latex?\left&space;\|&space;y&space;\right&space;\|&space;=&space;\sqrt{6}" title="\left \| y \right \| = \sqrt{6}" />
 <img src="https://latex.codecogs.com/png.latex?\left&space;\langle&space;x,y&space;\right&space;\rangle&space;=&space;3" title="\left \langle x,y \right \rangle = 3" />
 
 
 <img src="https://latex.codecogs.com/png.latex?cos\theta&space;=&space;\frac{\left&space;\langle&space;x,y&space;\right&space;\rangle}{\left&space;\|&space;x&space;\right&space;\|\left&space;\|&space;y&space;\right&space;\|}&space;=&space;\frac{1}{2}" title="cos\theta = \frac{\left \langle x,y \right \rangle}{\left \| x \right \|\left \| y \right \|} = \frac{1}{2}" />
 <img src="https://latex.codecogs.com/png.latex?=>&space;\theta&space;=&space;cos^-1\left&space;(\frac{1}{2}\right&space;)" title="=> \theta = cos^-1\left (\frac{1}{2}\right )" />
 <img src="https://latex.codecogs.com/png.latex?=>&space;\theta&space;=&space;\frac{\pi}{3}" title="=> \theta = \frac{\pi}{3}" />
+
+### Finding vector perpendicular to unit vector
+
+To find the constant <img src="https://latex.codecogs.com/png.latex?\alpha&space;\in&space;\mathbb{R}" title="\alpha \in \mathbb{R}" /> and the vector <img src="https://latex.codecogs.com/png.latex?x^\perp" title="x^\perp" /> which is perpendicular to the unit vector u such that <img src="https://latex.codecogs.com/png.latex?x&space;=&space;au&space;&plus;&space;x^\perp" title="x = au + x^\perp" />
+
+<img src="https://latex.codecogs.com/png.latex?a&space;=&space;\left&space;\langle&space;x,u&space;\right&space;\rangle" title="a = \left \langle x,u \right \rangle" />
