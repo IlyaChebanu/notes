@@ -83,6 +83,7 @@ Parametrize the line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R
 
 **2016 Question 2**
 
+**(a)**
 Parametrize the plane in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> given by the equation: <img src="https://latex.codecogs.com/png.latex?x&plus;2y-3z=4" title="x+2y-3z=4" />
 
 Solution:
@@ -93,3 +94,18 @@ Solution:
 
 <img src="https://latex.codecogs.com/png.latex?\\x=-2y&plus;3z&plus;4&space;\\y&space;=&space;1y&space;&plus;&space;0z&space;&plus;&space;0&space;\\z&space;=&space;0y&space;&plus;&space;1z&space;&plus;&space;0&space;\\&space;\\\Rightarrow&space;\begin{bmatrix}&space;x\\&space;y\\&space;z&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;4\\&space;0\\&space;0&space;\end{bmatrix}&space;&plus;&space;y\begin{bmatrix}&space;-2\\&space;1\\&space;0&space;\end{bmatrix}&space;&plus;&space;z\begin{bmatrix}&space;3\\&space;0\\&space;1&space;\end{bmatrix}" title="\\x=-2y+3z+4 \\y = 1y + 0z + 0 \\z = 0y + 1z + 0 \\ \\\Rightarrow \begin{bmatrix} x\\ y\\ z \end{bmatrix} = \begin{bmatrix} 4\\ 0\\ 0 \end{bmatrix} + y\begin{bmatrix} -2\\ 1\\ 0 \end{bmatrix} + z\begin{bmatrix} 3\\ 0\\ 1 \end{bmatrix}" />
 
+**(b)**
+
+<img src="https://latex.codecogs.com/png.latex?l:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto&space;l(t)&space;=&space;\begin{bmatrix}&space;x(t)\\&space;y(t)\\&space;z(t)&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;1\\&space;1\\&space;-2&space;\end{bmatrix}&space;&plus;&space;t\begin{bmatrix}&space;1\\&space;2\\&space;-3&space;\end{bmatrix}" title="l:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto l(t) = \begin{bmatrix} x(t)\\ y(t)\\ z(t) \end{bmatrix} = \begin{bmatrix} 1\\ 1\\ -2 \end{bmatrix} + t\begin{bmatrix} 1\\ 2\\ -3 \end{bmatrix}" />
+
+parametrizes a line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" />. Explain why this line intersects **orthogonally** the plane given in part (a) and find the point of intersection.
+
+Solution:
+
+The direction of the line <img src="https://latex.codecogs.com/png.latex?\begin{bmatrix}&space;1\\&space;2\\&space;-3&space;\end{bmatrix}" title="\begin{bmatrix} 1\\ 2\\ -3 \end{bmatrix}" /> is the direction of the normal to the plane.
+
+**Note**: To get the normal of a plane construct a vector using the coefficients of the line's equation. for <img src="https://latex.codecogs.com/png.latex?\\x&plus;2y-3z=4,&space;normal&space;=&space;\begin{bmatrix}&space;1\\&space;2\\&space;-3&space;\end{bmatrix}" title="\\x+2y-3z=4, normal = \begin{bmatrix} 1\\ 2\\ -3 \end{bmatrix}" />
+
+To get the point of intersection we sub in x(t), y(t), z(t) for x, y, z in the line's equation. Therefore;
+
+<img src="https://latex.codecogs.com/png.latex?\\line&space;\&space;intersects&space;\&space;plane&space;\iff&space;(1&plus;t)&space;&plus;&space;2(1&plus;2t)-3(-2-3t)&space;=&space;4&space;\\\iff&space;t&space;=&space;-\frac{5}{14}&space;\\&space;so&space;\&space;the&space;\&space;point&space;\&space;of&space;\&space;intersection&space;=&space;l(-\frac{5}{14})&space;=&space;\begin{bmatrix}&space;1\\&space;1\\&space;-2&space;\end{bmatrix}&space;-&space;\frac{5}{14}\begin{bmatrix}&space;1\\&space;2\\&space;-3&space;\end{bmatrix}" title="\\line \ intersects \ plane \iff (1+t) + 2(1+2t)-3(-2-3t) = 4 \\\iff t = -\frac{5}{14} \\ so \ the \ point \ of \ intersection = l(-\frac{5}{14}) = \begin{bmatrix} 1\\ 1\\ -2 \end{bmatrix} - \frac{5}{14}\begin{bmatrix} 1\\ 2\\ -3 \end{bmatrix}" />
