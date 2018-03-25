@@ -73,9 +73,22 @@ That is, the line <img src="https://latex.codecogs.com/png.latex?2x&space;-&spac
 
 <img src="https://latex.codecogs.com/png.latex?\gamma&space;:\mathbb{R}&space;\rightarrow&space;\mathbb{R}^2:y&space;\mapsto&space;\gamma(y)&space;=&space;\begin{bmatrix}&space;4\\&space;0&space;\end{bmatrix}&space;&plus;&space;y&space;\begin{bmatrix}&space;4\\&space;1&space;\end{bmatrix}" title="\gamma :\mathbb{R} \rightarrow \mathbb{R}^2:y \mapsto \gamma(y) = \begin{bmatrix} 4\\ 0 \end{bmatrix} + y \begin{bmatrix} 4\\ 1 \end{bmatrix}" />
 
-**2016 Question 2**
+
 Parametrize the line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> that passes through the points
 
 <img src="https://latex.codecogs.com/png.latex?p&space;=&space;\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix},&space;q&space;=&space;\begin{bmatrix}&space;3\\&space;-1\\&space;5&space;\end{bmatrix}" title="p = \begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix}, q = \begin{bmatrix} 3\\ -1\\ 5 \end{bmatrix}" />
 
 <img src="https://latex.codecogs.com/png.latex?\\\gamma:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto\gamma(t)&space;=&space;p&space;&plus;&space;t(q-p)\\\\=\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix}&space;&plus;&space;t\begin{bmatrix}&space;3-1\\&space;-1-0\\&space;5&plus;2&space;\end{bmatrix}\\\\\\&space;=\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix}&plus;t\begin{bmatrix}&space;2\\&space;-1\\&space;7&space;\end{bmatrix}" title="\\\gamma:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto\gamma(t) = p + t(q-p)\\\\=\begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix} + t\begin{bmatrix} 3-1\\ -1-0\\ 5+2 \end{bmatrix}\\\\\\ =\begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix}+t\begin{bmatrix} 2\\ -1\\ 7 \end{bmatrix}" />
+
+
+**2016 Question 2**
+
+Parametrize the plane in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> given by the equation: <img src="https://latex.codecogs.com/png.latex?x&plus;2y-3z=4" title="x+2y-3z=4" />
+
+Solution:
+
+<img src="https://latex.codecogs.com/png.latex?x&plus;2y-3z=4" title="x+2y-3z=4" />
+
+<=>
+
+<img src="https://latex.codecogs.com/png.latex?\\x=-2y&plus;3z&plus;4&space;\\y&space;=&space;1y&space;&plus;&space;0z&space;&plus;&space;0&space;\\z&space;=&space;0y&space;&plus;&space;1z&space;&plus;&space;0&space;\\&space;\\\Rightarrow&space;\begin{bmatrix}&space;x\\&space;y\\&space;z&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;4\\&space;0\\&space;0&space;\end{bmatrix}&space;&plus;&space;y\begin{bmatrix}&space;-2\\&space;1\\&space;0&space;\end{bmatrix}&space;&plus;&space;z\begin{bmatrix}&space;3\\&space;0\\&space;1&space;\end{bmatrix}" title="\\x=-2y+3z+4 \\y = 1y + 0z + 0 \\z = 0y + 1z + 0 \\ \\\Rightarrow \begin{bmatrix} x\\ y\\ z \end{bmatrix} = \begin{bmatrix} 4\\ 0\\ 0 \end{bmatrix} + y\begin{bmatrix} -2\\ 1\\ 0 \end{bmatrix} + z\begin{bmatrix} 3\\ 0\\ 1 \end{bmatrix}" />
