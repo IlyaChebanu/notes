@@ -75,5 +75,7 @@ That is, the line <img src="https://latex.codecogs.com/png.latex?2x&space;-&spac
 
 **2016 Question 2**
 Parametrize the line in <img src="https://latex.codecogs.com/png.latex?\mathbb{R}^3" title="\mathbb{R}^3" /> that passes through the points
+
 <img src="https://latex.codecogs.com/png.latex?p&space;=&space;\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix},&space;q&space;=&space;\begin{bmatrix}&space;3\\&space;-1\\&space;5&space;\end{bmatrix}" title="p = \begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix}, q = \begin{bmatrix} 3\\ -1\\ 5 \end{bmatrix}" />
+
 <img src="https://latex.codecogs.com/png.latex?\\\gamma:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto\gamma(t)&space;=&space;p&space;&plus;&space;t(q-p)\\\\=\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix}&space;&plus;&space;t\begin{bmatrix}&space;3-1\\&space;-1-0\\&space;5&plus;2&space;\end{bmatrix}\\\\\\&space;=\begin{bmatrix}&space;1\\&space;0\\&space;-2&space;\end{bmatrix}&plus;t\begin{bmatrix}&space;2\\&space;-1\\&space;7&space;\end{bmatrix}" title="\\\gamma:\mathbb{R}\rightarrow\mathbb{R}^3:t\mapsto\gamma(t) = p + t(q-p)\\\\=\begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix} + t\begin{bmatrix} 3-1\\ -1-0\\ 5+2 \end{bmatrix}\\\\\\ =\begin{bmatrix} 1\\ 0\\ -2 \end{bmatrix}+t\begin{bmatrix} 2\\ -1\\ 7 \end{bmatrix}" />
