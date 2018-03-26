@@ -157,10 +157,5 @@ Inputting the values into the formula we get
 
 #### Row echelon form
 
-- Last column of the last row must end in a 1
-- The leading coefficient of a row is strictly to the right of the row above it
-
-eg:
-
 <img src="https://latex.codecogs.com/png.latex?\left&space;[\begin{matrix}&space;1&&space;5&space;&&space;3&space;&&space;2\\&space;0&&space;1&space;&&space;7&space;&&space;4\\&space;0&&space;0&space;&&space;0&space;&&space;1&space;\end{matrix}\mid&space;\begin{matrix}&space;2\\&space;5\\&space;7\\&space;\end{matrix}&space;\right&space;]" title="\left [\begin{matrix} 1& 5 & 3 & 2\\ 0& 1 & 7 & 4\\ 0& 0 & 0 & 1 \end{matrix}\mid \begin{matrix} 2\\ 5\\ 7\\ \end{matrix} \right ]" />
 
