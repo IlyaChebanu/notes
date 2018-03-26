@@ -145,3 +145,22 @@ a, b, c correspond to the x,y,z of the normal n
 Inputting the values into the formula we get
 
 <img src="https://latex.codecogs.com/png.latex?\\2(x-1)&space;-1(y-3)&space;&plus;&space;5(z&plus;2)&space;=&space;0&space;\\\iff&space;2x-2-y-3&plus;5z&plus;10=0&space;\\\iff&space;2x-y&plus;5z&plus;5=0" title="\\2(x-1) -1(y-3) + 5(z+2) = 0 \\\iff 2x-2-y-3+5z+10=0 \\\iff 2x-y+5z+5=0" />
+
+
+### Matrix multiplication
+
+#### Matrix * vector
+
+<img src="https://latex.codecogs.com/png.latex?\\\begin{bmatrix}&space;x_1&space;&&space;y_1&space;&&space;z_1\\&space;x_2&space;&&space;y_2&space;&&space;z_2\\&space;x_3&space;&&space;y_3&space;&&space;z_3&space;\end{bmatrix}\begin{bmatrix}&space;i\\&space;j\\&space;k&space;\end{bmatrix}&space;\iff&space;\begin{bmatrix}&space;ix_1&space;&plus;&space;iy_1&space;&plus;&space;iz_1\\&space;jx_2&space;&plus;&space;jy_2&space;&plus;&space;jz_2\\&space;kx_3&space;&plus;&space;ky_3&space;&plus;&space;kz_3&space;\end{bmatrix}&space;\\\\&space;\\&space;the\&space;same\&space;as\&space;flipping\&space;the\&space;vector\&space;on\&space;it's\&space;side\&space;\\&space;and\&space;multiplying\&space;it's\&space;columns\&space;by\&space;the\&space;columns\&space;in\&space;\\&space;the\&space;matrix\\&space;\\\begin{bmatrix}&space;\&space;i&space;&&space;\&space;j&space;&&space;\&space;k&space;\&space;\&space;\end{bmatrix}\\&space;\\&space;\begin{bmatrix}&space;x_1&space;&&space;y_1&space;&&space;z_1\\&space;x_2&space;&&space;y_2&space;&&space;z_2\\&space;x_3&space;&&space;y_3&space;&&space;z_3&space;\end{bmatrix}" title="\\\begin{bmatrix} x_1 & y_1 & z_1\\ x_2 & y_2 & z_2\\ x_3 & y_3 & z_3 \end{bmatrix}\begin{bmatrix} i\\ j\\ k \end{bmatrix} \iff \begin{bmatrix} ix_1 + iy_1 + iz_1\\ jx_2 + jy_2 + jz_2\\ kx_3 + ky_3 + kz_3 \end{bmatrix} \\\\ \\ the\ same\ as\ flipping\ the\ vector\ on\ it's\ side\ \\ and\ multiplying\ it's\ columns\ by\ the\ columns\ in\ \\ the\ matrix\\ \\\begin{bmatrix} \ i & \ j & \ k \ \ \end{bmatrix}\\ \\ \begin{bmatrix} x_1 & y_1 & z_1\\ x_2 & y_2 & z_2\\ x_3 & y_3 & z_3 \end{bmatrix}" />
+
+### Gaussian elimination
+
+#### Row echelon form
+
+- Last column of the last row must end in a 1
+- The leading coefficient of a row is strictly to the right of the row above it
+
+eg:
+
+<img src="https://latex.codecogs.com/png.latex?\left&space;[\begin{matrix}&space;1&&space;5&space;&&space;3&space;&&space;2\\&space;0&&space;1&space;&&space;7&space;&&space;4\\&space;0&&space;0&space;&&space;0&space;&&space;1&space;\end{matrix}\mid&space;\begin{matrix}&space;2\\&space;5\\&space;7\\&space;\end{matrix}&space;\right&space;]" title="\left [\begin{matrix} 1& 5 & 3 & 2\\ 0& 1 & 7 & 4\\ 0& 0 & 0 & 1 \end{matrix}\mid \begin{matrix} 2\\ 5\\ 7\\ \end{matrix} \right ]" />
+
