@@ -7,3 +7,19 @@ Accessing RAM takes thousands of CPU cycles
 To decrease D-cache misses organise data in contiguous blocks that are as small as possible and access them sequentially (no jumping around within the contiguous memory block).
 To decrease I-cache misses keep high performance loops as small as possible and avoid calling functions within innermost loops.
 
+### Dot product
+#### Dot product tests
+- collinear
+- collinear but opposite
+- perpendicular
+- same direction
+- opposite direction
+
+#### Dot product applications
+- enemy in front or behind
+- height of a point above or below a plane
+  - plane defined by some point q and a normal vector n
+  - p as position of the player
+  - v = p _ q, or the vector pointing from the plane towards the player
+  - v.n projects the position onto the normal vector, giving us the height of the player from the plane 
+  - h = (p-q).n
