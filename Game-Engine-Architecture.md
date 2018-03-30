@@ -16,10 +16,11 @@ To decrease I-cache misses keep high performance loops as small as possible and 
 - opposite direction
 
 #### Dot product applications
-- enemy in front or behind
-- height of a point above or below a plane
-    - plane defined by some point q and a normal vector n
-    - p as position of the player
-    - v = p _ q, or the vector pointing from the plane towards the player
-    - v.n projects the position onto the normal vector, giving us the height of the player from the plane 
-    - h = (p-q).n
+enemy in front or behind
+
+height of a point above or below a plane
+- plane defined by some point q and a normal vector n
+- p as position of the player
+- v = p _ q, or the vector pointing from the plane towards the player
+- v.n projects the position onto the normal vector, giving us the height of the player from the plane 
+- h = (p-q).n
