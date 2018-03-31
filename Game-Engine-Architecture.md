@@ -107,3 +107,43 @@ M[1][0]=jx; M[1][1]=jy; M[1][2]=jz; M[1][3]=0.0f;
 M[2][0]=kx; M[2][1]=ky; M[2][2]=kz; M[2][3]=0.0f;
 M[3][0]=tx; M[3][1]=ty; M[3][2]=tz; M[3][3]=1.0f;
 ```
+
+### Quaternions
+A matrix is not always ideal to represent a rotation.
+1. Requires 9 floats to represent a rotation, which is excessive considering that there are only 3 degrees of freedom.
+2. Rotating a vector requires 3 dot products, or a total of 9 multiplications and 6 additions.
+3. It's often important to be able to find a rotation that is some % of the way between two known rotations.
+
+A quaternion looks like a 4D vector but behaves differently.
+A quaternion can be interpreted as a 4D complex number with a single real axis, written in the form <img src="https://latex.codecogs.com/png.latex?i_{q_x}&plus;j_{q_y}&space;&plus;&space;k_{q_z}&space;&plus;&space;q_w" title="i_{q_x}+j_{q_y} + k_{q_z} + q_w" />.
+Unit length quaternions represent 3D rotations.
+
+#### Unit quaternions as rotations
+A unit quaternion can be visualized as a 3D vector + scalar coordinate. The vector part is scaled by the sine of the half-angle of the rotation. The scalar part is the cosine of the half-angle. The unit quaternion *q* can be written as follows:
+
+<img src="https://latex.codecogs.com/png.latex?q&space;=&space;[qv&space;\&space;qs]&space;=&space;[a\&space;sin&space;\frac{\theta}{2}&space;\&space;cos&space;\frac{\theta}{2}]" title="q = [qv \ qs] = [a\ sin \frac{\theta}{2} \ cos \frac{\theta}{2}]" />
+
+where *a* is a unit vector along the axis of rotation, and theta is the angle of rotation.
+
+<img src="https://latex.codecogs.com/png.latex?q&space;=&space;[a_x\&space;sin&space;\frac{\theta}{2}&space;\&space;\&space;a_y\&space;sin&space;\frac{\theta}{2}&space;\&space;\&space;a_z\&space;sin&space;\frac{\theta}{2}&space;\&space;\&space;cos&space;\frac{\theta}{2}]" title="q = [a_x\ sin \frac{\theta}{2} \ \ a_y\ sin \frac{\theta}{2} \ \ a_z\ sin \frac{\theta}{2} \ \ cos \frac{\theta}{2}]" />
+
+#### Quaternion multiplication
+Given two quaternions *p* and *q*, the product *pq* represents the composite rotation. The product *pq* is refined as follows:
+
+<img src="https://latex.codecogs.com/png.latex?pq&space;=&space;\begin{bmatrix}&space;(p_sq_v&space;&plus;&space;q_sp_v&space;&plus;&space;p_v\&space;X\&space;q_v)&space;&&space;(p_sq_s&space;-&space;p_v&space;.&space;q_v)&space;\end{bmatrix}" title="pq = \begin{bmatrix} (p_sq_v + q_sp_v + p_v\ X\ q_v) & (p_sq_s - p_v . q_v) \end{bmatrix}" />
+
+where p_s, q_s represent the scalar component and p_v, q_v represent the vector component of the quaternion.
+
+#### Quaternion inverse
+In order to calculate the inverse of a quaternion we must first defire a quantity known as the *conjugate* (usually denoted q*).
+
+<img src="https://latex.codecogs.com/png.latex?q*&space;=&space;\begin{bmatrix}&space;-q_v&space;&&space;q_s&space;\end{bmatrix}" title="q* = \begin{bmatrix} -q_v & q_s \end{bmatrix}" />
+
+Given this, the inverse quaternion is defined as follows:
+
+<img src="https://latex.codecogs.com/png.latex?q^{-1}&space;=&space;\frac{q*}{\left&space;|&space;q&space;\right&space;|^2}" title="q^{-1} = \frac{q*}{\left | q \right |^2}" />
+
+Since our quaternions are always of unit length (|q| = 1), the inverse and conjugate are identical.
+This means that inverting a quaternion is much faster than inverting a 3x3 matrix.
+
+#### Rotating vectors with quaternions
