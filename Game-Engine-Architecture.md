@@ -16,11 +16,24 @@ To decrease I-cache misses keep high performance loops as small as possible and 
 - opposite direction
 
 #### Dot product applications
-enemy in front or behind
+- Enemy in front or behind.
+- Height of a point above or below a plane.
+  - plane defined by some point q and a normal vector n.
+  - p as position of the player.
+  - v = p _ q, or the vector pointing from the plane towards the player.
+  - v.n projects the position onto the normal vector, giving us the height of the player from the plane.
+  - h = (p-q).n 
 
-height of a point above or below a plane
-- plane defined by some point q and a normal vector n
-- p as position of the player
-- v = p _ q, or the vector pointing from the plane towards the player
-- v.n projects the position onto the normal vector, giving us the height of the player from the plane 
-- h = (p-q).n
+### Cross product
+#### Cross product applications
+- Finding a vector perpendicular to two other vectors.
+- Finding a matrix representing the object's orientation given the object's local basis vectors.
+  - assuming only the object's k_local vector (direction in which it is facing), and assuming the object has no roll about the k_local vector.
+  - i_local = normalize(j_world x k_local) *(j_world being the up vector [0,1,0])*.
+  - j_local = k_local x i_local.
+- Finding a normal to the surface of a triangle/plane.
+  - n = normalize((P2 - P1) x (P3 - P1)).
+- Physics simulations (torque)
+  - Given a force F and a vector r from the centre of mass to the point where the force is applied, torque N = r x F
+  
+ 
