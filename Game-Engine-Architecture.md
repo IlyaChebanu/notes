@@ -36,4 +36,8 @@ To decrease I-cache misses keep high performance loops as small as possible and 
 - Physics simulations (torque)
   - Given a force F and a vector r from the centre of mass to the point where the force is applied, torque N = r x F
   
- 
+### Linear interpolation (LERP)
+L = LERP(A, B, b) = (1 - b)A + bB  where b ranges from 0 to 1
+
+L is the position vector of a point that lies b * 100 perfect of the way along the line from A to B.
+
