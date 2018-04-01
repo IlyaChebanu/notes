@@ -1,3 +1,4 @@
+## Software engineering fundamentals
 ### Parallelism paradigm shift
 Because modern CPUs have multiple cores, and therefore can execute instructions in parallel, nowadays it is more favourable to write code that uses more cycles but has to access memory less because accessing memory is much slower.
 
@@ -7,6 +8,7 @@ Accessing RAM takes thousands of CPU cycles
 To decrease D-cache misses organise data in contiguous blocks that are as small as possible and access them sequentially (no jumping around within the contiguous memory block).
 To decrease I-cache misses keep high performance loops as small as possible and avoid calling functions within innermost loops.
 
+## 3D Math
 ### Dot product
 #### Dot product tests
 - collinear
@@ -276,3 +278,51 @@ Where s can either be a scalar or a vector for non-uniform scaling.
 - Easily interpolated.
 
 #### Dual quaternions
+A *rigid transformation* involves a rotation and translation, a "corkscrew" motion. These can be represented using dual quaternions. 
+- LERP blending can be performed in constant speed, shortest path, coordinate invariant manner, similar to using LERP for translations and SLERP for rotational quaternions.
+- Like an ordinary quuaternion, except the four components are dual numbers instead of real-valued numbers.
+  - A dual number can be written as the sum of a non-dual part and a dual part <img src="https://latex.codecogs.com/png.latex?\hat{a}&space;=&space;a&space;&plus;&space;\varepsilon&space;b" title="\hat{a} = a + \varepsilon b" />. <img src="https://latex.codecogs.com/png.latex?\varepsilon" title="\varepsilon" /> is called the dual unit, defined in a way that <img src="https://latex.codecogs.com/png.latex?\varepsilon^2&space;=&space;0" title="\varepsilon^2 = 0" /> without <img src="https://latex.codecogs.com/png.latex?\varepsilon" title="\varepsilon" /> being 0. 
+  - Because each dual number can be represented by two real numbers, a dual quaternion can be represented by a 8D vector.
+  - It can also be represented as the sum of two ordinary quaternions: <img src="https://latex.codecogs.com/png.latex?\hat{q}&space;=&space;q_a&space;&plus;&space;\varepsilon&space;q_b" title="\hat{q} = q_a + \varepsilon q_b" />.
+
+Dual quaternion paper: https://www.cs.tcd.ie/publications/tech-reports/reports.06/TCD-CS-2006-46.pdf/
+
+### Other useful mathematical objects
+#### Lines, rays, segments
+An infinite line can be represented by a point *P* plus a unit vector *u* in the direction of the line.
+L(t) = P + tu, refer to parametrization in Linear Algebra notes.
+
+A ray is a line that extends to infinity in only one direction. This can be expressed with L(t) and a constraint t >= 0.
+
+A segment is bound at both ends by *P0* and *P1*, and can also be represented using L(t) in two ways:
+1. L(t) = P0 + tu, where 0 <= t <= |P1-P0|.
+2. L(t) = P0 + t(P1-P0), where 0 <= t <= 1.
+
+Option 2 is more convenient, as we don't have to store |P1-P0| in memory.
+
+#### Spheres
+Spheres are described as a point *C* and a radius *r*. This packs nicely into a four-element vector [Cx Cy Cz r].
+
+#### Planes
+The equation of a plane is often written as follows:
+Ax + By + Cz + D = 0
+This equation is only satisfied for the points [x y z] that lie on the plane.
+Planes can be represented by a point *P0* and a normal vector *n*.
+[A B C] lies in the direction of the normal. If that vector is normalized, we get *n*, and the normalized parameter <img src="https://latex.codecogs.com/png.latex?d&space;=&space;D/\sqrt{A^2&space;&plus;&space;B^2&space;&plus;&space;C^2}" title="d = D/\sqrt{A^2 + B^2 + C^2}" />.
+
+To test whether an arbitrary point *P* lies on the plane, we find the signed distance from point *P* to the origin along the normal *n*, and if this signed distance is equal to the signed distance d = -n.P0 from the plane from the origin, then *P* must lie on the plane. Expanding some terms:
+
+signed distance *P* to origin = signed distance plane to origin
+
+<img src="https://latex.codecogs.com/png.latex?\\n\cdot&space;P&space;=&space;n\cdot&space;P_0&space;\\n\cdot&space;P&space;-&space;n\cdot&space;P_0&space;=&space;0&space;\\ax&space;&plus;&space;by&space;&plus;&space;cz&space;-&space;n\cdot&space;P_0&space;=&space;0&space;\\ax&space;&plus;&space;by&space;&plus;&space;cz&space;&plus;&space;d&space;=&space;0" title="\\n\cdot P = n\cdot P_0 \\n\cdot P - n\cdot P_0 = 0 \\ax + by + cz - n\cdot P_0 = 0 \\ax + by + cz + d = 0" />
+
+To describe a plane we only need the normal vector *n* and the distance from the origin *d*. the four element vector [nx ny nz d] is a compact way to represent a plane in memory.
+
+#### Axis-Aligned bounding boxes
+An AABB can be represented by a six-element vector containing the minimum and maximum coordinates along each of the 3 principal axes, <img src="https://latex.codecogs.com/png.latex?\begin{bmatrix}&space;x_{min}&space;&&space;x_{max}&space;&y_{min}&space;&y_{max}&space;&z_{min}&space;&z_{max}&space;\end{bmatrix}" title="\begin{bmatrix} x_{min} & x_{max} &y_{min} &y_{max} &z_{min} &z_{max} \end{bmatrix}" /> or two points P_min and P_max.
+To test whether a point *P* is inside or outside any given AABB we simply test if all of the following are true:
+
+<img src="https://latex.codecogs.com/png.latex?\\&space;P_x&space;\geq&space;x_{min}\&space;and\&space;P_x&space;\leq&space;x_{max}\&space;and&space;\\&space;P_y&space;\geq&space;y_{min}\&space;and\&space;P_y&space;\leq&space;y_{max}\&space;and&space;\\&space;P_z&space;\geq&space;z_{min}\&space;and\&space;P_z&space;\leq&space;z_{max}" title="\\ P_x \geq x_{min}\ and\ P_x \leq x_{max}\ and \\ P_y \geq y_{min}\ and\ P_y \leq y_{max}\ and \\ P_z \geq z_{min}\ and\ P_z \leq z_{max}" />
+
+Because these tests are inexpensive, AABBs are often used as an "early out" collision check. if the AABBs of two objects do not intersect, then there is no need to do a more detailed collision test.
+
