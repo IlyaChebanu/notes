@@ -116,6 +116,8 @@ A matrix is not always ideal to represent a rotation.
 
 A quaternion looks like a 4D vector but behaves differently.
 A quaternion can be interpreted as a 4D complex number with a single real axis, written in the form <img src="https://latex.codecogs.com/png.latex?i_{q_x}&plus;j_{q_y}&space;&plus;&space;k_{q_z}&space;&plus;&space;q_w" title="i_{q_x}+j_{q_y} + k_{q_z} + q_w" />.
+Or a+bi+cj+dk.
+i^2 = j^2 = k^2 = ijk = -1
 Unit length quaternions represent 3D rotations.
 
 #### Unit quaternions as rotations
