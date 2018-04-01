@@ -115,9 +115,7 @@ A matrix is not always ideal to represent a rotation.
 3. It's often important to be able to find a rotation that is some % of the way between two known rotations.
 
 A quaternion looks like a 4D vector but behaves differently.
-A quaternion can be interpreted as a 4D complex number with a single real axis, written in the form <img src="https://latex.codecogs.com/png.latex?iq_x&plus;jq_y&space;&plus;&space;kq_z&space;&plus;&space;q_w" title="iq_x+jq_y+ kq_z + q_w" />.
-
-i^2 = j^2 = k^2 = ijk = -1.
+A quaternion can be interpreted as a 4D complex number with a single real axis, written in the form <img src="https://latex.codecogs.com/png.latex?i_{q_x}&plus;j_{q_y}&space;&plus;&space;k_{q_z}&space;&plus;&space;q_w" title="i_{q_x}+j_{q_y} + k_{q_z} + q_w" />.
 Unit length quaternions represent 3D rotations.
 
 #### Unit quaternions as rotations
@@ -149,3 +147,132 @@ Since our quaternions are always of unit length (|q| = 1), the inverse and conju
 This means that inverting a quaternion is much faster than inverting a 3x3 matrix.
 
 #### Rotating vectors with quaternions
+1. Rewrite the vector in quaternion form <img src="https://latex.codecogs.com/png.latex?v&space;=&space;\begin{bmatrix}&space;v_x&space;&v_y&space;&v_z&space;&0&space;\end{bmatrix}" title="v = \begin{bmatrix} v_x &v_y &v_z &0 \end{bmatrix}" />.
+2. To rotate a vector *v* by a quaternion *q*
+   1. Premultiply the vector by q
+   2. Post-multiply by the inverse quaternion (conjugate in this case).
+Therefore, the rotated vector <img src="https://latex.codecogs.com/png.latex?v'&space;=&space;rotate(q,&space;v)&space;=&space;qvq^*" title="v' = rotate(q, v) = qvq^*" />.
+
+#### Quaternion multiplication application
+To find a unit vector describing the direction an object is traveling, assuming the positive z-axis points toward the front of an object. The forward unit vector of an object in model space is <img src="https://latex.codecogs.com/png.latex?F_M&space;=&space;[0\&space;0\&space;1]" title="F_M = [0\ 0\ 1]" /> by definition. To transform this into world space, take the object's orientation quaternion q and use it with the equation. 
+<img src="https://latex.codecogs.com/png.latex?F_W&space;=&space;qF_Mq^*&space;=&space;q[0\&space;0\&space;1\&space;0]q^*" title="F_W = qF_Mq^* = q[0\ 0\ 1\ 0]q^*" />.
+
+#### Quaternion concatenation
+Done the same way as matrix concatenation.
+<img src="https://latex.codecogs.com/png.latex?v'&space;=&space;q_3\&space;q_2\&space;q_1\&space;v\&space;q_1^*\&space;q_2^*\&space;q_3^*" title="v' = q_3\ q_2\ q_1\ v\ q_1^*\ q_2^*\ q_3^*" />
+
+#### Converting quaternion to a matrix
+If <img src="https://latex.codecogs.com/png.latex?q&space;=&space;[qv_x\&space;qv_y\&space;qv_z\&space;qs]&space;=&space;[x\&space;y\&space;z\&space;w]" title="q = [qv_x\ qv_y\ qv_z\ qs] = [x\ y\ z\ w]" />, then we can find *R* as follows:
+
+<img src="https://latex.codecogs.com/png.latex?R&space;=&space;\begin{bmatrix}&space;1-2y^2-2z^2&space;&2xy&plus;2zw&space;&2xz-2yw&space;\\&space;2xy-2zw&space;&&space;1-2x^2-2z^2&space;&2yz&plus;2xw&space;\\&space;2xz&plus;2yw&space;&2yz-2xw&space;&1-2x^2-2y^2&space;\end{bmatrix}" title="R = \begin{bmatrix} 1-2y^2-2z^2 &2xy+2zw &2xz-2yw \\ 2xy-2zw & 1-2x^2-2z^2 &2yz+2xw \\ 2xz+2yw &2yz-2xw &1-2x^2-2y^2 \end{bmatrix}" />
+
+Likewise, given *R*, we can find *q* as follows:
+```c++
+void matrixToQuaternion(const float R[3][3], float q[/*4*/])
+{
+  float trace = R[0][0] + R[1][1] + R[2][2];
+  
+  // check the diagonal
+  if (trace > 0.0f)
+  {
+    float s = sqrt(trace + 1.0f);
+    q[3] = s * 0.5f;
+    
+    float t = 0.5f / s;
+    q[0] = (R[2][1] - R[1][2]) * t;
+    q[1] = (R[0][2] - R[2][0]) * t;
+    q[2] = (R[1][0] - R[0][1]) * t;
+  }
+  else
+  {
+    // diagonal is negative
+    int i = 0;
+    if (R[1][1] > R[0][0]) i = 1;
+    if (R[2][2] > R[i][i]) i = 2;
+    
+    static const int NEXT[3] = {1, 2, 0};
+    int j = NEXT[i];
+    int k = NEXT[j];
+    
+    float s = sqrt((R[i][j] - (R[j][j] + R[k][k])) + 1.0f);
+    q[i] = s * 0.5f;
+    
+    float t;
+    if (s != 0.0) t = 0.5f / s;
+    else t = s;
+    
+    q[3] = (R[k][j] - R[j][k]) * t;
+    q[j] = (R[j][i] + R[i][j]) * t;
+    q[k] = (R[k][i] + R[i][k]) * t;
+  }
+}
+```
+For even faster methods, http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.html
+
+#### Rotational linear interpolation
+Easiest and least computationally intensive approach is to LERP a 4D vector.
+<img src="https://latex.codecogs.com/png.latex?LERP(q_A,&space;q_B,&space;\beta)&space;=&space;\frac{(1&space;-&space;\beta)q_A&space;&plus;&space;\beta&space;q_B}{\left&space;|&space;(1-\beta)q_A)&space;&plus;&space;\beta&space;q_B&space;\right&space;|}&space;=&space;normalize\left&space;(&space;\begin{bmatrix}&space;(1-\beta)q_A_x)&space;&plus;&space;\beta&space;q_B_x\\&space;(1-\beta)q_A_y)&space;&plus;&space;\beta&space;q_B_y\\&space;(1-\beta)q_A_z)&space;&plus;&space;\beta&space;q_B_z\\&space;(1-\beta)q_A_w)&space;&plus;&space;\beta&space;q_B_w&space;\end{bmatrix}^T&space;\right&space;)" title="LERP(q_A, q_B, \beta) = \frac{(1 - \beta)q_A + \beta q_B}{\left | (1-\beta)q_A) + \beta q_B \right |} = normalize\left ( \begin{bmatrix} (1-\beta)q_A_x) + \beta q_B_x\\ (1-\beta)q_A_y) + \beta q_B_y\\ (1-\beta)q_A_z) + \beta q_B_z\\ (1-\beta)q_A_w) + \beta q_B_w \end{bmatrix}^T \right )" />
+
+#### Spherical LERP
+LERP interpolates along a chord of the 4D hypersphere, rather than along the surface. This leads to rotation animations that do not have consistent angular speed when the *beta* parameter is changing at a constant rate. The rotation appears slower at the start and towards the end of the animation.
+To solve this problem, spherical linear interpolation, or **SLERP** can be used.
+The formula for SLERP is:
+
+<img src="https://latex.codecogs.com/png.latex?\\SLERP(p,&space;q,&space;\beta)&space;=&space;w_pp&space;&plus;&space;w_qq&space;\\&space;\\where&space;\\&space;\\w_p&space;=&space;\frac{sin(1-\beta)\theta}{sin(\theta)},&space;\\&space;\\w_q&space;=&space;\frac{sin(\beta\theta)}{sin(\theta)}" title="\\SLERP(p, q, \beta) = w_pp + w_qq \\ \\where \\ \\w_p = \frac{sin(1-\beta)\theta}{sin(\theta)}, \\ \\w_q = \frac{sin(\beta\theta)}{sin(\theta)}" />
+
+Cosine of the angle between any unit-length quaternions can be found by taking their 4D dot product. Knowing cos theta, we can calculate theta and the sines.
+
+<img src="https://latex.codecogs.com/png.latex?\\cos(\theta)&space;=&space;p.q&space;=&space;p_xq_x&space;&plus;&space;p_yq_y&space;&plus;&space;p_zq_z&space;&plus;&space;p_wq_w&space;\\\theta&space;=&space;cos^{-1}(p.q)" title="\\cos(\theta) = p.q = p_xq_x + p_yq_y + p_zq_z + p_wq_w \\\theta = cos^{-1}(p.q)" />
+
+SLERP is slower than LERP.
+
+### Comparison of rotational representations
+#### Euler angles
+Typically represented as a 3D vector (Y, P, R) yaw, pitch, roll.
+PROS:
+- Simple, small size, intuitive.
+- Easily interpolate simple rotations about a single axis.
+CONS:
+- Cannot be interpolated easily when the rotation is about an arbitrarily oriented axis.
+- Prone to gimbal lock.
+- Order in which the rotations are performed matters.
+- Depend upon the mapping from the x, y, z axes onto the natural front, left, up directions for the object being rotated.
+
+#### 3x3 Matrices
+PROS:
+- Convenient and effective rotational representation.
+- Does not suffer from gimbal lock.
+- Represents arbitrary rotations uniquely.
+- Rotations can be applied to points and vectors in a straighforward manner through matrix multiplication.
+- Most CPUs and GPUs have built-in support for hardware accelerated dot products and matrix multiplication.
+- Rotations reversable using the inverse matrix, which for pure rotations is just finding the transpose.
+- 4x4 matrices offer a way to represent transformations, rotations and scaling in a consistent way.
+CONS:
+- Not intuitive.
+- Not easily interpolated.
+- Takes up a lot of storage.
+
+#### Axis + Angle
+Rotations can be represented by defining a unit vector as the axis of rotation, plus a scalar for the angle of rotation.
+PROS:
+- Intuitive.
+- Compact.
+CONS:
+- Cannot be easily interpolated.
+- Cannot be applied to points and vectors in a straighforward way, needs to be converted to a matrix or quaternion first.
+
+#### Quaternions
+Analogous to the axis + angle representation. Primary difference between the two is that quaternion's axis of rotation is scaled by the sine of the half-angle of rotation, and instead of storing the angle in the fourth component, the cosine of the half-angle is stored instead.
+PROS:
+- Permits rotations to be concatenated and applied directly to points and vectors via multiplication.
+- Permits rotations to be easily interpolated via LERP or SLERP.
+- Small size.
+
+#### SQT Transformations
+When a quaternion is combined with a translation vector and a scale factor, then we have a viable alternative to a 4x4 matrix.
+SQT = [*s* *q* *t*]
+Where s can either be a scalar or a vector for non-uniform scaling.
+- Smaller size (8 / 10 floats, as opposed to 12 for a 4x3 matrix).
+- Easily interpolated.
+
+#### Dual quaternions
