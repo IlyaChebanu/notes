@@ -231,10 +231,14 @@ SLERP is slower than LERP.
 ### Comparison of rotational representations
 #### Euler angles
 Typically represented as a 3D vector (Y, P, R) yaw, pitch, roll.
+
 PROS:
+
 - Simple, small size, intuitive.
 - Easily interpolate simple rotations about a single axis.
+
 CONS:
+
 - Cannot be interpolated easily when the rotation is about an arbitrarily oriented axis.
 - Prone to gimbal lock.
 - Order in which the rotations are performed matters.
@@ -242,6 +246,7 @@ CONS:
 
 #### 3x3 Matrices
 PROS:
+
 - Convenient and effective rotational representation.
 - Does not suffer from gimbal lock.
 - Represents arbitrary rotations uniquely.
@@ -249,23 +254,31 @@ PROS:
 - Most CPUs and GPUs have built-in support for hardware accelerated dot products and matrix multiplication.
 - Rotations reversable using the inverse matrix, which for pure rotations is just finding the transpose.
 - 4x4 matrices offer a way to represent transformations, rotations and scaling in a consistent way.
+
 CONS:
+
 - Not intuitive.
 - Not easily interpolated.
 - Takes up a lot of storage.
 
 #### Axis + Angle
 Rotations can be represented by defining a unit vector as the axis of rotation, plus a scalar for the angle of rotation.
+
 PROS:
+
 - Intuitive.
 - Compact.
+
 CONS:
+
 - Cannot be easily interpolated.
 - Cannot be applied to points and vectors in a straighforward way, needs to be converted to a matrix or quaternion first.
 
 #### Quaternions
 Analogous to the axis + angle representation. Primary difference between the two is that quaternion's axis of rotation is scaled by the sine of the half-angle of rotation, and instead of storing the angle in the fourth component, the cosine of the half-angle is stored instead.
+
 PROS:
+
 - Permits rotations to be concatenated and applied directly to points and vectors via multiplication.
 - Permits rotations to be easily interpolated via LERP or SLERP.
 - Small size.
