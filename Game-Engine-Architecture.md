@@ -372,3 +372,63 @@ xmm0.w = xmm0.w + xmm1.w;
 
 Moving data between x87 FPU registers and SSE registers is slow. To minimize the costs of going back and forth between memory, x87 FPU registers and SSE registers, most SIMD math libraries do their best to leave data in the SSE registers for as long as possible. Even scalar values are left in the SSE registers. For example, after a dot product between two vectors produces a scalar, we leave the result in an SSE register as it can be used later in other vector calculations without incurring a transfer cost. Scalars are represented by duplicating the single floating-point value across all four slots.
 
+#### \_\_m128 data type
+Visual studio provides a data type called \_\_m128. In many cases, variables of this type will be stored in RAM. But when used in calculations, the vaules are manipulated directly in the SSE regiters.
+Declaring local variables and function arguments of type \_\_m128 often results in the compiler storing the values directly in SSE registers, rather than on the stack.
+
+Initializing an \_\_m128 is done as follows:
+```
+__m128 v = _mm_set_ps(-1.0f, 2.0f, 0.5f, 1.0f);
+```
+
+#### SSE Intrinsics
+In order to use \_\_m128 and SSE intrinsics, the .cpp file must `#include <xmmintrin.h>`.
+
+To add two \_\_m128 values:
+```c++
+__m128 addWithIntrinsics(const __m128 a, const __m128 b) 
+{
+  return _mm_add_ps(a, b);
+}
+```
+
+Testing the function:
+```c++
+#include <xmmintrin.h>
+
+__m128 addWithIntrinsics(const __m128 a, const __m128 b) 
+{
+  return _mm_add_ps(a, b);
+}
+
+void testSSE()
+{
+  // float arrays must be 16-byte aligned to avoid crashes or performance hits.
+  __declspec(align(16)) float A[4];
+  __declspec(align(16)) float B[4] = {8.0f, 6.0f, 4.0f, 2.0f};
+  __declspec(align(16)) float C[4];
+  
+  // set a = (1, 2, 3, 4) from literals
+  // load b = (2, 4, 6, 8) from float array
+  // Float array backwards due to Intel CPUs being little-endian
+  __m128 a = _mm_set_ps(1.0f, 2.0f, 3.0f, 4.0f);
+  __m128 b = _mm_load_ps(&B[0]);
+  
+  __m128 c = addWithIntrinsics(a, b);
+  
+  // store the original values back for printing
+  _mm_store_ps(&A[0], a);
+  _mm_store_ps(&B[0], b);
+  
+  // store result into float array
+  _mm_store_ps(&C[0], c);
+  
+  // inspect the results
+  // results backwards due to little-endian
+  printf("a = %g %g %g %g\n", A[0], A[1], A[2], A[3]);
+  printf("b = %g %g %g %g\n", B[0], B[1], B[2], B[3]);
+  printf("c = %g %g %g %g\n", C[0], C[1], C[2], C[3]);
+}
+
+
+```
