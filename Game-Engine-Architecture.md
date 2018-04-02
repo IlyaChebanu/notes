@@ -339,3 +339,36 @@ To test whether a point *P* is inside or outside any given AABB we simply test i
 
 Because these tests are inexpensive, AABBs are often used as an "early out" collision check. if the AABBs of two objects do not intersect, then there is no need to do a more detailed collision test.
 
+#### Oriented bounding boxes
+An OBB is a cuboid that has been oriented so it aligns in some way with the object it bounds.
+Usually aligns with the local axes of the object.
+A technique to test for collision is to transform a point into the OBB's aligned coordinate system and then use the AABB intersection test.
+
+#### Frusta
+A frustum is a group of 6 planes that define a truncated pyramid shape.
+Conveniently defines the viewable region.
+Testing whether a point lies inside a frustum involves using the dot products to determine whether the point lies on the front or back side of each plane. If it lies inside all six planes, it is inside the frustum.
+A helpful trick is to transform the world-space point by applying the camera's perspective projection. In this space (homogeneous clip space), the frustum is just an AABB.
+
+#### Convex polyhedral regions
+A convex polyhedral region is defined by an arbitrary set of planes, all with normals pointing inward or outward. Tests are similar to a frustum test, but with more planes. Convex regions are useful for arbitrarily shaped trigger regions.
+
+### Hardware-Accelerated SIMD math
+(S)ingle (I)nstruction (M)ultiple (D)ata.
+Allows common vector operations such as dot products and matrix multiplication to be performed extremely quickly.
+Streaming SIMD Extentions, or SSE instructions, utilize 128-bit registers that can contain integer or IEEE floats.
+The SSE mode most commonly used by game engines is the packed 32-bit floating-point mode. In this mode, four 32-bit values are packed into a single 128-bit register.
+
+```
+addps xmm0, xmm1
+```
+adds four floats in xmm0 register to the four floats in xmm1 and stores the results back into xmm0.
+```
+xmm0.x = xmm0.x + xmm1.x;
+xmm0.y = xmm0.y + xmm1.y;
+xmm0.z = xmm0.z + xmm1.z;
+xmm0.w = xmm0.w + xmm1.w;
+```
+
+Moving data between x87 FPU registers and SSE registers is slow. To minimize the costs of going back and forth between memory, x87 FPU registers and SSE registers, most SIMD math libraries do their best to leave data in the SSE registers for as long as possible. Even scalar values are left in the SSE registers. For example, after a dot product between two vectors produces a scalar, we leave the result in an SSE register as it can be used later in other vector calculations without incurring a transfer cost. Scalars are represented by duplicating the single floating-point value across all four slots.
+
