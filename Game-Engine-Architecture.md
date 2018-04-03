@@ -492,3 +492,132 @@ __m128 mulVectorMatrix(const __m128 v, const __m128 Mrow[4])
 
 4x4 Matrix-Matrix multiplication can be performed using a similar approach. When calculating P = AB, treat each row of A as a vector and multiply it with the rows of B as done in `mulVectorMatrix()`, adding the results of each dot product to produce the corresponding row in the product P.
 
+### Random number generation
+#### Mersenne Twister
+SFMT (SIMD-oriented fast Mersenne Twister)
+
+#### Mother-of-All
+Faster than Mersenne Twister with a period of 2^250.
+
+#### Xorshift
+Between Mother-of-All and Mersenne Twister in terms of randomness, but runs faster than Mother-of-All.
+
+
+## Engine support systems
+### Subsystem start-up and shut-down
+#### C++ static initialization order
+In c++, global and static objects are constructed before the program's entry point (main()) is called in an unpredictable order. Same goes for the destructors after main() returns.
+#### Construct on demand
+A static variable declared within a function will not be constructed before main(), but rather on the first invocation of the function. so if our global singleton is function-static, we can control the order of construction for our global singletons.
+
+```c++
+class RenderManager
+{
+  public:
+    // get the one and only instance
+    static RenderManager& get()
+    {
+      static RenderManager sSingleton;
+      return sSingleton;
+    }
+    
+    RenderManager()
+    {
+      // starting up other managers we depend on by calling their get() functions first
+      VideoManager::get();
+      TextureManager::get();
+      
+      // now start up the render manager
+      // ...
+    }
+    
+    ~RenderManager()
+    {
+      // shut down the render manager
+      // ...
+    }
+};
+```
+
+Many software engineering textbooks suggest this design or a variant involving dynamic allocation of the singleton as shown below:
+
+```c++
+static RenderManager& get()
+{
+  static RenderManager* gpSingleton = NULL;
+  if (gpSingleton == NULL) gpSingleton = new RenderManager;
+  ASSERT(gpSingleton);
+  return *gpSingleton;
+}
+```
+
+However, this still gives us no way to control the destruction order.
+
+#### A simple approach that works
+If we want to stick with the idea of singleton managers for our subsystems, one approach is to define explicit start-up and shut-down functions for each singleton manager class like so:
+
+```c++
+class RenderManager
+{
+  public:
+    RenderManager()
+    {
+      // nothing
+    }
+    
+    ~RenderManager()
+    {
+      // nothing
+    }
+    
+    void startUp()
+    {
+      // start up the manager ...
+    }
+    
+    void shutDown()
+    {
+      // shut down the manager ...
+    }
+    //...
+};
+
+class PhysicsManager { /* similar */ };
+class MemoryManager { /* similar */ };
+// ...
+
+RenderManager     gRenderManager;
+PhysicsManager    gPhysicsManager;
+MemoryManager     gMemoryManager;
+// ...
+
+int main(int argc, const char* argv)
+{
+  // Start up engine systems in the correct order
+  gMemoryManager.startUp();
+  gRenderManager.startUp();
+  gPhysicsManager.startUp();
+  // ...
+  
+  // Run the game
+  gSimulationManager.run();
+  
+  // Shut down everything, in reverse order
+  // ...
+  gPhysicsManager.shutDown();
+  gRenderManager.shutDown();
+  gMemoryManager.shutDown();
+  
+  return 0;
+}
+```
+
+Other "more elegant" ways to accomplish this include having each manager register itself into a global priority queue and then walk the queue to start up all the managers in the proper order. But, the brute-force approach always wins out because:
+
+- It's simple and easy to implement.
+- It's explicit.
+- It's easy to debug and maintain.
+
+Refer to page 236 for OGRE example.
+
+### Memory management
