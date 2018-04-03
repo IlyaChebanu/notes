@@ -429,6 +429,66 @@ void testSSE()
   printf("b = %g %g %g %g\n", B[0], B[1], B[2], B[3]);
   printf("c = %g %g %g %g\n", C[0], C[1], C[2], C[3]);
 }
-
-
 ```
+
+#### Vector-Matrix multiplication with SSE
+Multiplication involves taking the dot product of the row vector *v* with the columns of matrix *M*. However this is inefficient using SSE registers and instead we multiply the components of *v* (vx, vy, vz, vw) with the rows of the matrix *M*.
+Since we're multiplying each individual component, we need to replicate the values of vx, vy, vz and vw across an SSE register [vx vx vx vx] to be able to multiply by a row.
+The code below defines macros to replicate the components using the `_mm_shuffle_ps()` intrinsic.
+
+```c++
+#define SHUFFLE_PARAM(x, y, z, w) ((x) | ((y) << 2) | ((z) << 4) | ((w) << 6))
+#define _mm_replicate_x_ps(v) _mm_shuffle_ps((v), (v), SHUFFLE_PARAM(0, 0, 0, 0))
+#define _mm_replicate_y_ps(v) _mm_shuffle_ps((v), (v), SHUFFLE_PARAM(1, 1, 1, 1))
+#define _mm_replicate_z_ps(v) _mm_shuffle_ps((v), (v), SHUFFLE_PARAM(2, 2, 2, 2))
+#define _mm_replicate_w_ps(v) _mm_shuffle_ps((v), (v), SHUFFLE_PARAM(3, 3, 3, 3))
+```
+
+Given these, vector-matrix multiplication can be performed as follows:
+
+```c++
+__m128 mulVectorMatrix(
+  const __m128& v,
+  const __m128& Mrow0,
+  const __m128& Mrow1,
+  const __m128& Mrow2,
+  const __m128& Mrow3)
+{
+  const __m128 xxxx = _mm_replicate_x_ps(v);
+  const __m128 yyyy = _mm_replicate_y_ps(v);
+  const __m128 zzzz = _mm_replicate_z_ps(v);
+  const __m128 wwww = _mm_replicate_w_ps(v);
+  
+  const __m128 xMrow0 = _mm_mul_ps(xxxx, Mrow0);
+  const __m128 yMrow1 = _mm_mul_ps(yyyy, Mrow1);
+  const __m128 zMrow2 = _mm_mul_ps(zzzz, Mrow2);
+  const __m128 wMrow3 = _mm_mul_ps(wwww, Mrow3);
+  
+  __m128 result = _mm_add_ps(xMrow0, yMrow1);
+  result        = _mm_add_ps(result, zMrow2);
+  result        = _mm_add_ps(result, wMrow3);
+  
+  return result;
+}
+```
+
+On some CPUs the code above can be optimized further by using multiply-and-add instruction `madd`. SSE doesn't support a `madd` instruction. However it can be faked with a macro.
+
+```c++
+#define _mm_madd_ps(a, b, c) _mm_add_ps(_mm_mul_ps((a), (b)), (c))
+
+__m128 mulVectorMatrix(const __m128 v, const __m128 Mrow[4])
+{
+  __m128 result;
+  
+  result = _mm_mul_ps(_mm_replicate_x_ps(v), Mrow[0]);
+  result = _mm_madd_ps(_mm_replicate_y_ps(v), Mrow[1], result);
+  result = _mm_madd_ps(_mm_replicate_z_ps(v), Mrow[2], result);
+  result = _mm_madd_ps(_mm_replicate_w_ps(v), Mrow[3], result);
+  
+  return result
+}
+```
+
+4x4 Matrix-Matrix multiplication can be performed using a similar approach. When calculating P = AB, treat each row of A as a vector and multiply it with the rows of B as done in `mulVectorMatrix()`, adding the results of each dot product to produce the corresponding row in the product P.
+
