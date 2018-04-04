@@ -621,3 +621,107 @@ Other "more elegant" ways to accomplish this include having each manager registe
 Refer to page 236 for OGRE example.
 
 ### Memory management
+Memory affects performance in 2 ways:
+1. Dynamic memory allocation via `malloc()` or `new` is a very slow operation. Performance can be improved by avoiding dynamic allocation or by making use of custom memory allocators.
+2. Performance is often dominated by a CPU's memory access patterns. data that is located in small, contiguous blocks can be operated on much more efficiently by the CPU.
+
+#### Optimizing dynamic memory allocation
+On most operating systems a call to malloc() or free() must context-switch from user mode into mernel mode, process the request and then switch back. These context switches can be expensive.
+A rule of thumb for game development is:
+- Keep heap allocation to a minimum, and never allocate from the heap within a tight loop.
+
+A custom allocator can satisfy requests from a preallocated memory block (using `malloc()` or `new`, or declared as a global variable). This avoids context switching.
+By making assumptions about its usage patterns, a custom allocated can be much more efficient than a general-purpose heap allocator.
+
+#### Stack-based allocators
+Many games allocate in a stack-like fashion. Whenever a new game level is loaded, memory is allocated for it. Once the level has been loaded, little or no allocation occurs. At the conclusion of the level, its data is unloaded and all of its memory can be freed.
+A stack allocator is easy to implement. Simply allocate a large contiguous block of memory using `malloc()` or `new`, or by declaring a global array of bytes. A pointer to the top of the stack is maintained. Each allocation request simply moves the pointer up by the requested number of bytes. The most recently allocated block can be freed by simply moving the top pointer back down.
+
+```c++
+class StackAllocator
+{
+  public:
+    // Stack marker represents the current top of the stack. You can only roll back to a marker.
+    typedef U32 Marker;
+    
+    // Constructs a stack allocated with the given total size
+    explicit StackAllocator(U32 stackSize_bytes);
+    
+    // Allocates a new block from stack top
+    void* alloc(U32 size_bytes);
+    
+    Marker getMarker();
+    
+    void freeToMarker(Marker marker);
+    
+    void clear();
+  private:
+    // ...
+};
+```
+
+#### Double-ended stack allocators
+A single memory block can contain two stack allocators, one that allocates up from the bottom of the block and one that allocates down from the top of the block.
+In midway's Hydro Thunder arcade game, the bottom of the stack is used for loading and unloading levels, while the top stack is used for temporary memory bolcks that are allocated and freed every frame.
+
+#### Pool allocators
+It's quite common in game engine programming to allocate lots of small blocks of memory, each of which the same size. For example:
+- Allocate/free matrices.
+- Iterators.
+- Links in a linked list.
+- Renderable mesh instances.
+
+A pool allocator works by preallocating a large block of memory whose size is an exact multiple of the size of the elements that will be allocated.
+A pool of 4x4 matrices would be a multiple of 64 bytes.
+Each element within the pool is added to a linked list of free elements. When the pool is initialized, the free list contains all of the elements. Whenever an allocation request is made, we grab the next free element off the free list and return it. When an element is freed, we tack it back onto the free list. 
+
+#### Aligned allocations
+To align blocks, allocate extra memory than was requested and adjust the address of the memory block upward.
+- Determine the amount by which the block's address must be adjusted by masking off the least-significant bits of the original block's memory address.
+- AND the original address with the mask to get the amount by which the block is misaligned.
+- Subtract alignment bytes size from that result, and add it to the original address.
+
+```c++
+void* allocateAligned(size_t size_bytes, size_t alignment)
+{
+  ASSERT((alignment & (alignment - 1)) == 0); // power of 2
+  
+  // Determine total amount of memory to allocate
+  size_t expandedSize_bytes = size_bytes + alignment;
+  
+  uintptr_t rawAddress - reinterpret_cast<uintptr_t>(allocateUnaligned(expandedSize_bytes));
+  
+  size_t mask = (alignment - 1);
+  uintptr_t misalignment = (rawAddress & mask);
+  ptrdiff_t adjustment = alignment - misalignment;
+  
+  uintptr_t alignedAddress = rawAddress + adjustment;
+  
+  U8* pAlignedMem = reinterpret_cast<U8*>(alignedAddress);
+  pAlignedMem[-1] = static_cast<U8>(adjustment);
+  
+  return static_cast<void*>pAlignedMem);
+}
+```
+
+```c++
+void freeAligned(void* pMem)
+{
+  const U8* pAlignedMem = reinterpret_cast<const U8*>(pMem);
+  uintptr_t alignedAddress = reinterpret_cast<uintptr_t>(pMem);
+  ptrdiff_t adjustment = static_cast<ptrdiff_t>(pAlignedMem[-1);
+  uintptr_t rawAddress = alignedAddress - adjustment;
+  void* pRawMem = reinterpret_cast<void*>(rawAddress);
+  
+  freeUnaligned(pRawMem);
+}
+```
+
+#### Single frame allocators
+A single-frame allocator is implemented by allocating a block of memory and managing it with a stack allocator. At the beginning of each frame the stack's top pointer is cleared to the bottom of the block.
+
+#### Double buffered allocators
+Create two single-frame allocators and swap back and forth between them on each frame. Similar to OpenGL's swap buffers.
+Useful for caching results of asynchronous processing.
+
+#### Memory fragmentation
