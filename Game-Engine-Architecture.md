@@ -725,3 +725,70 @@ Create two single-frame allocators and swap back and forth between them on each 
 Useful for caching results of asynchronous processing.
 
 #### Memory fragmentation
+Detrimental effects of memory fragmentation can be avoided by using stack and/or pool allocators.
+- Stack allocations are always contiguous.
+- Pool allocators do bbecome fragmented, but requests can never fail as all blocks are the exact same size.
+
+#### Defragmentation
+When differently sized objects are being allocated and freed in random order, neither stack-based or pool-based allocators can be used. In this case, fragmentation can be avoided by periodically defragmenting the heap.
+Defragmentation involves shifting allocated blocks from higher memory addresses down to lower addresses.
+The tricky part is that allocated blocks of memory are being moved around. If anyone has a pointer into one of the blocks, then moving the block will invalidate the pointer. The solution is to patch any and all pointers into a shifted memoru block so that they point to the correct new address. This is known as pointer relocation. In order to support memory defragmentation, smart pointers or handles should be used.
+
+Defragmentation can be a slow operation, however it can be amortized over many frames by allowing up to N allocated blocks to be shifted each frame, for some small value N like 8 or 16. As long as allocations and deallocations aren't happening at a faster rate than defragmentation shifts, the heap will remain mostly defragmented at all times.
+
+### Containers
+Common container data types include:
+
+- Array. `int a[5]`
+- Dynamic array. `std::vector`
+- Linked list. `std::list`
+- Stack. `std::stack`
+- Queue. `std::queue`
+- Deque. Double ended queue `std::deque`
+- Tree. 
+- Binary search tree.
+- Binary heap.
+- Priority queue. `std::priority_queue`
+- Dictionary. `std::map, std::hash_map`
+- Set.
+- Graph.
+- Directed acyclic graph.
+
+Container operations:
+
+- Insert.
+- Remove.
+- Sequential access (iteration).
+- Random access.
+- Find.
+- Sort.
+
+#### Iterators
+```c++
+void processArray(int container[], int numElements)
+{
+  int* pBegin = &container[0];
+  int* pEnd = &container[numElements];
+  
+  for (int* p = pBegin; p != pEnd; p++)
+  {
+    int element = *p;
+    // do stuff ...
+  }
+}
+
+void processList(std::list<int>& container)
+{
+  std::list<int>::iterator pBegin = container.begin();
+  std::list<int>::iterator pEnd = container.end();
+  std::list<int>::iterator p;
+  
+  for (p = pBegin; p != pEnd; p++)
+  {
+    int element = *p;
+    // do stuff ...
+  }
+}
+```
+
+
