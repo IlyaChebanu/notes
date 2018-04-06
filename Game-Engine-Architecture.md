@@ -791,4 +791,8 @@ void processList(std::list<int>& container)
 }
 ```
 
+### Strings
+#### Unicode under windows
+`wchar_t` is used exclusively for UTF-16.
+`char` is used for ANSI/UTF-8 strings.
 
