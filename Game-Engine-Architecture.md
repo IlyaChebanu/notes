@@ -796,3 +796,113 @@ void processList(std::list<int>& container)
 `wchar_t` is used exclusively for UTF-16.
 `char` is used for ANSI/UTF-8 strings.
 
+### Resources and file system
+#### Synchronous file I/O
+Both of the standard C file I/O libraries are synchronous. The following code snippet demonstrates how the entire contents of a file might be read into an in-memory buffer using the synchronous I/O function fread().
+```c++
+bool syncReadFile(const char* filePath, U8* buffer, size_t bufferSizze, size_t& rBytesRead)
+{
+  FILE* handle = fopen(filePath, "rb");
+  if (handle)
+  {
+    // Block occurs here until all the data has been read.
+    size_t bytesRead = fread(buffer, 1, bufferSize, handle);
+    int err = ferror(handle); // get the error if one occurred.
+    fclose(handle);
+    
+    if (err == 0)
+    {
+      rBytesRead = bytesRead;
+      return true;
+    }
+  }
+  rBytesRead = 0
+  return false;
+}
+
+void main(int argc, const char* argv[])
+{
+  U8 testBuffer[512];
+  size_t bytesRead = 0;
+  
+  if (syncReadFile("C:\\testfile.bin", testBuffer, sizeof(testBuffer), bytesRead))
+    printf("success: read %u bytes\n", bytesRead);
+}
+```
+
+#### Asynchronous file I/O
+Streaming refers to the act of loading data in the background while the main program continues to run. A load screen free experience can be provided by streaming the next level in the background while the game is being played. Audio and texture data are the most commonly streamed types of data.
+To support streaming, asynchronous file I/O is used.
+In the following example, the function `asyncReadFile()` returns immediately, and the data is not present in the buffer until the callback function `asyncReadComplete()` has been called by the I/O library.
+```c++
+ AsyncRequestHandle g_hRequest;
+ U8 g_asyncBuffer[512];
+ 
+ static void asyncReadComplete(AsyncRequestHandle hRequest);
+ 
+ void main(int argc, const char* argv[])
+ {
+  AsyncFileHandle hFile = asyncOpen("C:\\testfile.bin");
+  
+  if (hfile)
+  {
+    g_hRequest = asyncReadFile(
+      hFile,
+      g_asyncBuffer,
+      sizeof(g_asyncBuffer),
+      asyncReadComplete);
+  }
+  // simulate doing real work
+  for (;;)
+  {
+    OutputDebugString("zzz...\n");
+    Sleep(50);
+  }
+ }
+ 
+ // Will be called when the data has been read
+ static void asyncReadComplete(AsyncRequestHandle hRequest)
+ {
+  if (hRequest == g_hRequest && asyncWasSuccessful(hRequest))
+  {
+    size_t bytes = asyncGetBytesReadOrWritten(hRequest);
+  
+    char msg[256];
+    snprintf(msg, sizeof(msg), "async success, read %u bytes\n", bytes);
+    OutputDebugString(msg);
+  }
+ }
+```
+
+Most async I/O libraries permit the program to fait for an I/O operation to complete after the request was made. This is useful in some situations where only a limited amount of work can be done before the results are needed to proceed.
+```c++
+U8 g_asyncBuffer[512];
+ 
+void main(int argc, const char* argv[])
+{
+  AsyncRequestHandle hRequest = ASYNC_INVALID_HANDLE;
+  AsyncFileHandle hFile = asyncOpen("C:\\testfile.bin");
+  
+  if (hfile)
+    hRequest = asyncReadFile(hFile, g_asyncBuffer, sizzeof(g_asyncBuffer), NULL); // no callback
+  
+  for (int i = 0; i < 10; i++)
+  {
+    OutputDebugString("zzz...\n");
+    Sleep(50);
+  }
+  
+  asyncWait(hRequest); // Can't do anything futher until we have  the data.
+  
+  if (asyncWasSuccessful(hRequest))
+  {
+    size_t bytes = asyncGetBytesReadOrWritten(hRequest);
+    
+    char msg[256];
+    snprintf(msg, sizeof(msg), "async success, read %u bytes\n", bytes);
+    OutputDebugString(msg);
+  }
+}
+```
+
+Some async libraries allow you to set deadlines on a request and specify what happens when a request misses its deadline.
