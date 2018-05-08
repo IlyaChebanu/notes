@@ -159,3 +159,56 @@ Inputting the values into the formula we get
 
 <img src="https://latex.codecogs.com/png.latex?\left&space;[\begin{matrix}&space;1&&space;5&space;&&space;3&space;&&space;2\\&space;0&&space;1&space;&&space;7&space;&&space;4\\&space;0&&space;0&space;&&space;0&space;&&space;1&space;\end{matrix}\mid&space;\begin{matrix}&space;2\\&space;5\\&space;7\\&space;\end{matrix}&space;\right&space;]" title="\left [\begin{matrix} 1& 5 & 3 & 2\\ 0& 1 & 7 & 4\\ 0& 0 & 0 & 1 \end{matrix}\mid \begin{matrix} 2\\ 5\\ 7\\ \end{matrix} \right ]" />
 
+
+## Things needed for final exam
+### Q1
+[] Vector addition + Scaling
+[] Calculating vector length
+[] Calculating angle between vectors
+[] Finding *a* and *v^perp* satisfying *v = au + v^perp*
+### Q2
+[] Explain orthonormal set
+[] Explain subspace
+[] Explain why *w = v - <v,u1>u1 - <v,u2>u2* is non-zero and perpendicular to u1 and u2
+[] Use formula above to determine perpendicular vector
+[] Calculate orthogonal projection of a vector onto the subspace spanned by 2 other vectors
+### Q3
+[] Parametrize plane given by equation
+[] Parametrize line given by equation
+[] Parametrize line passing through point p in the direction of v
+[] Find distance from a point to a plane
+[] Finding normal vector from equation
+[] Finding vectors parallel to a plane that do not lie on the same line through the origin
+[] Find point at which a line intersects a plane
+### Q4
+[] Matrix-vector multiplication
+[] Matrix-matrix multiplication
+[] Matrix transpose
+[] Explain eigenvector, eigenvalue
+[] Show that *(CD)^-1 = D^-1C^-1*
+### Q5
+[] Writing augmented matrix for a system of equations
+[] Parametrize augmented matrix
+[] Determine basis for the kernel
+[] Determine basis for the image
+[] Determine matrix E such that [EA|Eb] is the rref of [A|b]
+### Q6
+[] Check if vectors are linearly independent
+[] Is vector in kernel?
+[] Is vector in image?
+[] What's the dimension of the kernel?
+### Q7 
+[] Rotation matrices about an axis {e1, e2, e3} in R^3
+[] Calculate the composition of rotation matrices
+[] Find the axis of rotation for the composition
+### Q8
+[] Calculate the characteristic polynomial of a matrix
+[] Find all eigenvalues
+[] Parametrize the eigenspace of a matrix corresponding to some eigenvalue
+### Q9
+[] Finding invertible matrix and diagonal matrix
+[] Matrix traces
+[] Find a basis for R^n consisting of eigenvectors of a matrix
+### Q10
+[] Elementary matrix for row operation
+[] GJ elimination to find inverse of a matrix
