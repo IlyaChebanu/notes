@@ -200,10 +200,10 @@ Inputting the values into the formula we get
 ### Q7 
 - [x] Rotation matrices about an axis {e1, e2, e3} in R^3
 - [x] Calculate the composition of rotation matrices
-- [ ] Find the axis of rotation for the composition
+- [x] Find the axis of rotation for the composition
 ### Q8
 - [x] Calculate the characteristic polynomial of a matrix
-- [ ] Find all eigenvalues
+- [x] Find all eigenvalues
 - [x] Parametrize the eigenspace of a matrix corresponding to some eigenvalue
 ### Q9
 - [x] Finding diagonal matrix
