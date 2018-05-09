@@ -162,53 +162,53 @@ Inputting the values into the formula we get
 
 ## Things needed for final exam
 ### Q1
-- [ ] Vector addition + Scaling
-- [ ] Calculating vector length
-- [ ] Calculating angle between vectors
-- [ ] Finding *a* and *v^perp* satisfying *v = au + v^perp*
+- [x] Vector addition + Scaling
+- [x] Calculating vector length
+- [x] Calculating angle between vectors
+- [x] Finding *a* and *v^perp* satisfying *v = au + v^perp*
 ### Q2
 - [ ] Explain orthonormal set
 - [ ] Explain subspace
-- [ ] Explain why *w = v - <v,u1>u1 - <v,u2>u2* is non-zero and perpendicular to u1 and u2
-- [ ] Use formula above to determine perpendicular vector
+- [x] Explain why *w = v - <v,u1>u1 - <v,u2>u2* is non-zero and perpendicular to u1 and u2
+- [x] Use formula above to determine perpendicular vector
 - [ ] Calculate orthogonal projection of a vector onto the subspace spanned by 2 other vectors
 ### Q3
-- [ ] Parametrize plane given by equation
-- [ ] Parametrize line given by equation
-- [ ] Parametrize line passing through point p in the direction of v
+- [x] Parametrize plane given by equation
+- [x] Parametrize line given by equation
+- [x] Parametrize line passing through point p in the direction of v
 - [ ] Find distance from a point to a plane
-- [ ] Finding normal vector from equation
+- [x] Finding normal vector from equation
 - [ ] Finding vectors parallel to a plane that do not lie on the same line through the origin
 - [ ] Find point at which a line intersects a plane
 ### Q4
-- [ ] Matrix-vector multiplication
-- [ ] Matrix-matrix multiplication
-- [ ] Matrix transpose
-- [ ] Explain eigenvector, eigenvalue
+- [x] Matrix-vector multiplication
+- [x] Matrix-matrix multiplication
+- [x] Matrix transpose
+- [x] Explain eigenvector, eigenvalue
 - [ ] Show that *(CD)^-1 = D^-1C^-1*
 ### Q5
-- [ ] Writing augmented matrix for a system of equations
-- [ ] Parametrize augmented matrix
-- [ ] Determine basis for the kernel
-- [ ] Determine basis for the image
+- [x] Writing augmented matrix for a system of equations
+- [x] Parametrize augmented matrix
+- [x] Determine basis for the kernel
+- [x] Determine basis for the image
 - [ ] Determine matrix E such that [EA|Eb] is the rref of [A|b]
 ### Q6
-- [ ] Check if vectors are linearly independent
-- [ ] Is vector in kernel?
-- [ ] Is vector in image?
-- [ ] What's the dimension of the kernel?
+- [x] Check if vectors are linearly independent
+- [x] Is vector in kernel?
+- [x] Is vector in image?
+- [x] What's the dimension of the kernel?
 ### Q7 
-- [ ] Rotation matrices about an axis {e1, e2, e3} in R^3
-- [ ] Calculate the composition of rotation matrices
+- [x] Rotation matrices about an axis {e1, e2, e3} in R^3
+- [x] Calculate the composition of rotation matrices
 - [ ] Find the axis of rotation for the composition
 ### Q8
-- [ ] Calculate the characteristic polynomial of a matrix
+- [x] Calculate the characteristic polynomial of a matrix
 - [ ] Find all eigenvalues
-- [ ] Parametrize the eigenspace of a matrix corresponding to some eigenvalue
+- [x] Parametrize the eigenspace of a matrix corresponding to some eigenvalue
 ### Q9
-- [ ] Finding invertible matrix and diagonal matrix
+- [ ] Finding diagonal matrix
 - [ ] Matrix traces
 - [ ] Find a basis for R^n consisting of eigenvectors of a matrix
 ### Q10
-- [ ] Elementary matrix for row operation
-- [ ] GJ elimination to find inverse of a matrix
+- [x] Elementary matrix for row operation
+- [x] GJ elimination to find inverse of a matrix
