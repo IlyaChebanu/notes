@@ -167,16 +167,16 @@ Inputting the values into the formula we get
 - [x] Calculating angle between vectors
 - [x] Finding *a* and *v^perp* satisfying *v = au + v^perp*
 ### Q2
-- [ ] Explain orthonormal set
-- [ ] Explain subspace
+- [x] Explain orthonormal set
+- [x] Explain subspace
 - [x] Explain why *w = v - <v,u1>u1 - <v,u2>u2* is non-zero and perpendicular to u1 and u2
 - [x] Use formula above to determine perpendicular vector
-- [ ] Calculate orthogonal projection of a vector onto the subspace spanned by 2 other vectors
+- [x] Calculate orthogonal projection of a vector onto the subspace spanned by 2 other vectors
 ### Q3
 - [x] Parametrize plane given by equation
 - [x] Parametrize line given by equation
 - [x] Parametrize line passing through point p in the direction of v
-- [ ] Find distance from a point to a plane
+- [x] Find distance from a point to a plane
 - [x] Finding normal vector from equation
 - [ ] Finding vectors parallel to a plane that do not lie on the same line through the origin
 - [ ] Find point at which a line intersects a plane
@@ -191,7 +191,7 @@ Inputting the values into the formula we get
 - [x] Parametrize augmented matrix
 - [x] Determine basis for the kernel
 - [x] Determine basis for the image
-- [ ] Determine matrix E such that [EA|Eb] is the rref of [A|b]
+- [x] Determine matrix E such that [EA|Eb] is the rref of [A|b]
 ### Q6
 - [x] Check if vectors are linearly independent
 - [x] Is vector in kernel?
