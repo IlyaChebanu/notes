@@ -206,9 +206,9 @@ Inputting the values into the formula we get
 - [ ] Find all eigenvalues
 - [x] Parametrize the eigenspace of a matrix corresponding to some eigenvalue
 ### Q9
-- [ ] Finding diagonal matrix
+- [x] Finding diagonal matrix
 - [ ] Matrix traces
-- [ ] Find a basis for R^n consisting of eigenvectors of a matrix
+- [x] Find a basis for R^n consisting of eigenvectors of a matrix
 ### Q10
 - [x] Elementary matrix for row operation
 - [x] GJ elimination to find inverse of a matrix
