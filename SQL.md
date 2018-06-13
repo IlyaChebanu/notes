@@ -1,6 +1,6 @@
 ## Setting up bank database
 
-```
+```sql
 $ mysql -u root -p
 CREATE DATABASE bank;
 CREATE USER 'lrngsql'@'localhost' IDENTIFIED BY 'password';
