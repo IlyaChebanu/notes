@@ -17,10 +17,15 @@ source c:\...\*.sql
 
 ### Data types
 char(n) - if every string is the same length (255 bytes max)
+
 varchar(n) - variable length strings (65535 bytes max)
+
 tinytext - 255 bytes max
+
 text - 65535 bytes max
+
 mediumtext - 16777215 bytes max
+
 longtext - 4294967295 bytes max
 
 ### Listing character sets
