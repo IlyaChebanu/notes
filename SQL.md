@@ -56,7 +56,7 @@ CREATE TABLE person
   city VARCHAR(20),
   state VARCHAR(20),
   country VARCHAR(20),
-  postaal_code VARCHAR(20),
+  postal_code VARCHAR(20),
   CONSTRAINT pk_person PRIMARY KEY (person_id)
   );
 ```
@@ -90,4 +90,43 @@ ALTER TABLE favourite_food
     REFERENCES person (person_id);
 
 UNLOCK TABLES;
+```
+### Renaming column
+```
+ALTER TABLE person
+  RENAME COLUMN postaal_code TO postal_code;
+```
+## Data
+### INSERT
+```sql
+INSERT INTO person
+  (person_id, fname, lname, gender, birth_date)
+  VALUES (null, 'William', 'Turner', 'M', '1972-05-27');
+  
+INSERT INTO favourite_food
+  (person_id, food)
+  VALUES (1, 'pizza');
+
+
+INSERT INTO favourite_food
+  (person_id, food)
+  VALUES (1, 'cookies');
+
+
+INSERT INTO favourite_food
+  (person_id, food)
+  VALUES (1, 'nachos');
+  
+INSERT INTO person
+  (person_id, fname, lname, gender, birth_date, street, city, state, country, postal_code)
+  VALUES (null, 'Susan', 'Smith', 'F', '1975-11-02', '23 Maple St.', 'Arlington', 'VA', 'USA', '20220');
+```
+### SELECT
+```sql
+SELECT food
+  FROM favourite_food
+  WHERE person_id = 1
+  ORDER BY food;
+  
+SELECT person_id, fname, lname, birth_date FROM person;
 ```
