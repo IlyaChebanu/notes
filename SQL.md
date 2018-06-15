@@ -42,3 +42,32 @@ varchar(20) character set utf8
 ```sql
 create database foreign_sales character set utf8;
 ```
+
+## Schema
+### Person table
+```sql
+CREATE TABLE person
+  (person_id SMALLINT UNSIGNED,
+  fname VARCHAR(20),
+  lname VARCHAR(20),
+  gender ENUM('M','F'), /* gender CHAR(1) CHECK (gender IN ('M', 'F')), */
+  birth_date DATE,
+  street VARCHAR(30),
+  city VARCHAR(20),
+  state VARCHAR(20),
+  country VARCHAR(20),
+  postaal_code VARCHAR(20),
+  CONSTRAINT pk_person PRIMARY KEY (person_id)
+  );
+```
+### Food table
+```sql
+CREATE TABLE favourite_food
+  (person_id SMALLINT UNSIGNED,
+  food VARCHAR(20),
+  CONSTRAINT pk_favourite_food PRIMARY KEY (person_id, food),
+  CONSTRAINT fk_fav_food_person_id FOREIGN KEY (person_id) 
+    REFERENCES person (person_id)
+  );
+```
+Foreign key contrains the values of person_id column in favourite_food table to include only values found in the person table.
