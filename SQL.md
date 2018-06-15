@@ -92,7 +92,7 @@ ALTER TABLE favourite_food
 UNLOCK TABLES;
 ```
 ### Renaming column
-```
+```sql
 ALTER TABLE person
   RENAME COLUMN postaal_code TO postal_code;
 ```
