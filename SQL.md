@@ -71,3 +71,23 @@ CREATE TABLE favourite_food
   );
 ```
 Foreign key contrains the values of person_id column in favourite_food table to include only values found in the person table.
+### Update person_id PK
+Must drop favourite_food foreign key else
+```ERROR 1833 (HY000): Cannot change column 'person_id': used in a foreign key constraint 'fk_fav_food_person_id' of table 'bank.favourite_food'``` appears trying to alter person table to add auto_increment
+```sql
+LOCK TABLES
+  favourite_food WRITE,
+  person WRITE;
+  
+ALTER TABLE favourite_food 
+  DROP FOREIGN KEY fk_fav_food_person_id;
+
+ALTER TABLE person
+  MODIFY person_id SMALLINT UNSIGNED AUTO_INCREMENT; /* Adding auto_increment */
+  
+ALTER TABLE favourite_food
+  ADD CONSTRAINT fk_fav_food_person_id FOREIGN KEY (person_id)
+    REFERENCES person (person_id);
+
+UNLOCK TABLES;
+```
