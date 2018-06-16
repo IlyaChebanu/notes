@@ -168,3 +168,137 @@ UPDATE person
 | Having | Filters out unwanted groups |
 | Order by | Sorts resulting rows by one or more columns |
 
+Select clause can include:
+- Literals.
+- Expressions.
+- Function calls.
+### Select clause
+#### eg:
+```sql
+SELECT emp_id, 'ACTIVE', emp_id * 3.14159, UPPER(lname)
+  FROM employee;
+```
+| emp_id | ACTIVE | emp_id * 3.14159 | UPPER(lname) |
+| ------ | ------ | ---------------- | ------------ |
+|      1 | ACTIVE |          3.14159 | SMITH        |
+|      2 | ACTIVE |          6.28318 | BARKER       |
+|      3 | ACTIVE |          9.42477 | TYLER        |
+|      4 | ACTIVE |         12.56636 | HAWTHORNE    |
+|      5 | ACTIVE |         15.70795 | GOODING      |
+|      6 | ACTIVE |         18.84954 | FLEMING      |
+|      7 | ACTIVE |         21.99113 | TUCKER       |
+|      8 | ACTIVE |         25.13272 | PARKER       |
+|      9 | ACTIVE |         28.27431 | GROSSMAN     |
+|     10 | ACTIVE |         31.41590 | ROBERTS      |
+|     11 | ACTIVE |         34.55749 | ZIEGLER      |
+|     12 | ACTIVE |         37.69908 | JAMESON      |
+|     13 | ACTIVE |         40.84067 | BLAKE        |
+|     14 | ACTIVE |         43.98226 | MASON        |
+|     15 | ACTIVE |         47.12385 | PORTMAN      |
+|     16 | ACTIVE |         50.26544 | MARKHAM      |
+|     17 | ACTIVE |         53.40703 | FOWLER       |
+|     18 | ACTIVE |         56.54862 | TULMAN       |
+
+#### Using functions we can skip the from clause
+```sql
+SELECT VERSION(), USER(), DATABASE();
+```
+| VERSION() | USER()            | DATABASE() |
+| - | - | - |
+| 8.0.11    | lrngsql@localhost | bank       |
+
+#### Aliasing column names
+```sql
+SELECT emp_id AS ID, 'ACTIVE' AS status, emp_id * 3.14159 AS IDxPI, UPPER(lname) AS last_name
+  FROM employee;
+```
+| ID | status | IDxPI    | last_name |
+| - | - | - | - |
+|  1 | ACTIVE |  3.14159 | SMITH     |
+|  2 | ACTIVE |  6.28318 | BARKER    |
+|  3 | ACTIVE |  9.42477 | TYLER     |
+|  4 | ACTIVE | 12.56636 | HAWTHORNE |
+|  5 | ACTIVE | 15.70795 | GOODING   |
+|  6 | ACTIVE | 18.84954 | FLEMING   |
+|  7 | ACTIVE | 21.99113 | TUCKER    |
+|  8 | ACTIVE | 25.13272 | PARKER    |
+|  9 | ACTIVE | 28.27431 | GROSSMAN  |
+| 10 | ACTIVE | 31.41590 | ROBERTS   |
+| 11 | ACTIVE | 34.55749 | ZIEGLER   |
+| 12 | ACTIVE | 37.69908 | JAMESON   |
+| 13 | ACTIVE | 40.84067 | BLAKE     |
+| 14 | ACTIVE | 43.98226 | MASON     |
+| 15 | ACTIVE | 47.12385 | PORTMAN   |
+| 16 | ACTIVE | 50.26544 | MARKHAM   |
+| 17 | ACTIVE | 53.40703 | FOWLER    |
+| 18 | ACTIVE | 56.54862 | TULMAN    |
+
+**AS** keyword can be omitted.
+
+#### Removing duplicates
+```sql
+SELECT DISTINCT cust_id
+  FROM account;
+```
+### From clause
+#### Subquery-generated tables
+```sql
+SELECT e.emp_id, e.fname, e.lname
+  FROM (SELECT emp_id, fname, lname, start_date, title
+        FROM employee) e;
+```
+| emp_id | fname    | lname     |
+| - | - | - |
+|      1 | Michael  | Smith     |
+|      2 | Susan    | Barker    |
+|      3 | Robert   | Tyler     |
+|      4 | Susan    | Hawthorne |
+|      5 | John     | Gooding   |
+|      6 | Helen    | Fleming   |
+|      7 | Chris    | Tucker    |
+|      8 | Sarah    | Parker    |
+|      9 | Jane     | Grossman  |
+|     10 | Paula    | Roberts   |
+|     11 | Thomas   | Ziegler   |
+|     12 | Samantha | Jameson   |
+|     13 | John     | Blake     |
+|     14 | Cindy    | Mason     |
+|     15 | Frank    | Portman   |
+|     16 | Theresa  | Markham   |
+|     17 | Beth     | Fowler    |
+|     18 | Rick     | Tulman    |
+
+#### Views
+Virtual tables with no data associated.
+```sql
+CREATE VIEW employee_vw AS
+  SELECT emp_id, fname, lname, YEAR(start_date) start_year
+  FROM employee;
+```
+Can be viewed as an aliased SELECT statement.
+```sql
+SELECT emp_id, start_year
+  FROM employee_vw;
+```
+| emp_id | start_year |
+| - | - |
+|      1 |       2001 |
+|      2 |       2002 |
+|      3 |       2000 |
+|      4 |       2002 |
+|      5 |       2003 |
+|      6 |       2004 |
+|      7 |       2004 |
+|      8 |       2002 |
+|      9 |       2002 |
+|     10 |       2002 |
+|     11 |       2000 |
+|     12 |       2003 |
+|     13 |       2000 |
+|     14 |       2002 |
+|     15 |       2003 |
+|     16 |       2001 |
+|     17 |       2002 |
+|     18 |       2002 |
+
+#### Table links
