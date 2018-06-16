@@ -15,19 +15,6 @@ use bank;
 source c:\...\*.sql
 ```
 
-### Data types
-char(n) - if every string is the same length (255 bytes max)
-
-varchar(n) - variable length strings (65535 bytes max)
-
-tinytext - 255 bytes max
-
-text - 65535 bytes max
-
-mediumtext - 16777215 bytes max
-
-longtext - 4294967295 bytes max
-
 ### Listing character sets
 ```sql
 show character set;
@@ -169,4 +156,15 @@ UPDATE person
 | %W | Full weekday name (Sunday..Saturday) |
 | %w | Numeric day of the week (0=Sunday..6=Saturday) |
 | %Y | Four digit year (YYYY) |
+
+## Queries
+### Query caluses
+| Clause name | Purpose |
+| --- | --- |
+| Select | Determines what columns to include in the result |
+| From | Identifies the tables from which to draw data and how the tables are joined |
+| Where | Filters unwanted data |
+| Group by | Groups rows together by common column value |
+| Having | Filters out unwanted groups |
+| Order by | Sorts resulting rows by one or more columns |
 
