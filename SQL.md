@@ -130,3 +130,43 @@ SELECT food
   
 SELECT person_id, fname, lname, birth_date FROM person;
 ```
+### UPDATE
+```sql
+UPDATE person
+  SET street = '1225 Tremont St.',
+    city = 'Boston',
+    state = 'MA',
+    country = 'USA',
+    postal_code = '02138'
+  WHERE person_id = 1;
+```
+### DELETE
+```sql
+DELETE FROM person
+  WHERE person_id = 2;  
+```
+### str_to_date function
+```sql
+UPDATE person
+  SET birth_date = str_to_date('DEC-21-1980', '%b-%d-%Y')
+  WHERE person_id = 1;
+```
+| Formatters | Description |
+| ---------- | ----------- |
+| %a | Short weekday eg. Sun, Mon.. |
+| %b | Short month eg. Jan, Feb... |
+| %c | Numeric month (0..12) |
+| %d | Numeric day (0..31) |
+| %f | Number of microseconds (000000..999999) |
+| %H | Hour 24h format (00..23) |
+| %h | Hour 12h format (01..12) |
+| %i | Minutes within hour (00..59) |
+| %j | Day of the year (001..365) |
+| %M | Full month name (January..December) |
+| %m | Numeric month |
+| %p | AM / PM |
+| %s | Number of seconds (00..59) |
+| %W | Full weekday name (Sunday..Saturday) |
+| %w | Numeric day of the week (0=Sunday..6=Saturday) |
+| %Y | Four digit year (YYYY) |
+
