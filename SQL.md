@@ -173,7 +173,7 @@ Select clause can include:
 - Expressions.
 - Function calls.
 ### Select clause
-#### eg:
+##### eg:
 ```sql
 SELECT emp_id, 'ACTIVE', emp_id * 3.14159, UPPER(lname)
   FROM employee;
@@ -199,7 +199,7 @@ SELECT emp_id, 'ACTIVE', emp_id * 3.14159, UPPER(lname)
 |     17 | ACTIVE |         53.40703 | FOWLER       |
 |     18 | ACTIVE |         56.54862 | TULMAN       |
 
-#### Using functions we can skip the from clause
+##### Using functions we can skip the from clause
 ```sql
 SELECT VERSION(), USER(), DATABASE();
 ```
@@ -207,7 +207,7 @@ SELECT VERSION(), USER(), DATABASE();
 | - | - | - |
 | 8.0.11    | lrngsql@localhost | bank       |
 
-#### Aliasing column names
+##### Aliasing column names
 ```sql
 SELECT emp_id AS ID, 'ACTIVE' AS status, emp_id * 3.14159 AS IDxPI, UPPER(lname) AS last_name
   FROM employee;
@@ -235,13 +235,13 @@ SELECT emp_id AS ID, 'ACTIVE' AS status, emp_id * 3.14159 AS IDxPI, UPPER(lname)
 
 **AS** keyword can be omitted.
 
-#### Removing duplicates
+##### Removing duplicates
 ```sql
 SELECT DISTINCT cust_id
   FROM account;
 ```
-### From clause
-#### Subquery-generated tables
+#### From clause
+##### Subquery-generated tables
 ```sql
 SELECT e.emp_id, e.fname, e.lname
   FROM (SELECT emp_id, fname, lname, start_date, title
@@ -268,7 +268,7 @@ SELECT e.emp_id, e.fname, e.lname
 |     17 | Beth     | Fowler    |
 |     18 | Rick     | Tulman    |
 
-#### Views
+##### Views
 Virtual tables with no data associated.
 ```sql
 CREATE VIEW employee_vw AS
@@ -301,4 +301,91 @@ SELECT emp_id, start_year
 |     17 |       2002 |
 |     18 |       2002 |
 
-#### Table links
+##### Table links
+```sql
+SELECT employee.emp_id, employee.fname, employee.lname, department.name dept_name
+  FROM employee INNER JOIN department
+    ON employee.dept_id = department.dept_id;
+```
+| emp_id | fname    | lname     | dept_name      |
+| - | - | - | - |
+|      4 | Susan    | Hawthorne | Operations     |
+|      6 | Helen    | Fleming   | Operations     |
+|      7 | Chris    | Tucker    | Operations     |
+|      8 | Sarah    | Parker    | Operations     |
+|      9 | Jane     | Grossman  | Operations     |
+|     10 | Paula    | Roberts   | Operations     |
+|     11 | Thomas   | Ziegler   | Operations     |
+|     12 | Samantha | Jameson   | Operations     |
+|     13 | John     | Blake     | Operations     |
+|     14 | Cindy    | Mason     | Operations     |
+|     15 | Frank    | Portman   | Operations     |
+|     16 | Theresa  | Markham   | Operations     |
+|     17 | Beth     | Fowler    | Operations     |
+|     18 | Rick     | Tulman    | Operations     |
+|      5 | John     | Gooding   | Loans          |
+|      1 | Michael  | Smith     | Administration |
+|      2 | Susan    | Barker    | Administration |
+|      3 | Robert   | Tyler     | Administration |
+
+##### Table Aliases
+```sql
+SELECT e.emp_id, e.fname, e.lname, d.name dept_name
+  FROM employee e INNER JOIN department d
+    ON e.dept_id = d.dept_id
+```
+
+#### Where clause
+```sql
+SELECT emp_id, fname, lname, start_date, title
+  FROM employee
+  WHERE title = "Head Teller";
+```
+| emp_id | fname   | lname   | start_date | title       |
+| - | - | - | - | - |
+|      6 | Helen   | Fleming | 2004-03-17 | Head Teller |
+|     10 | Paula   | Roberts | 2002-07-27 | Head Teller |
+|     13 | John    | Blake   | 2000-05-11 | Head Teller |
+|     16 | Theresa | Markham | 2001-03-15 | Head Teller |
+
+```sql
+SELECT emp_id, fname, lname, start_date, title
+  FROM employee
+  WHERE start_date > "2003-01-01";
+```
+| emp_id | fname    | lname   | start_date | title        |
+| - | - | - | - | - |
+|      5 | John     | Gooding | 2003-11-14 | Loan Manager |
+|      6 | Helen    | Fleming | 2004-03-17 | Head Teller  |
+|      7 | Chris    | Tucker  | 2004-09-15 | Teller       |
+|     12 | Samantha | Jameson | 2003-01-08 | Teller       |
+|     15 | Frank    | Portman | 2003-04-01 | Teller       |
+
+```sql
+SELECT emp_id, fname, lname, start_date, title
+  FROM employee
+  WHERE start_date > "2003-01-01"
+    AND title = "Head Teller";
+```
+| emp_id | fname    | lname   | start_date | title        |
+| - | - | - | - | - |
+|      6 | Helen    | Fleming | 2004-03-17 | Head Teller  |
+
+```sql
+SELECT emp_id, fname, lname, start_date, title
+  FROM employee
+  WHERE start_date > "2003-01-01"
+    OR title = "Head Teller";
+```
+| emp_id | fname    | lname   | start_date | title        |
+| - | - | - | - | - |
+|      5 | John     | Gooding | 2003-11-14 | Loan Manager |
+|      6 | Helen    | Fleming | 2004-03-17 | Head Teller  |
+|      7 | Chris    | Tucker  | 2004-09-15 | Teller       |
+|     10 | Paula    | Roberts | 2002-07-27 | Head Teller  |
+|     12 | Samantha | Jameson | 2003-01-08 | Teller       |
+|     13 | John     | Blake   | 2000-05-11 | Head Teller  |
+|     15 | Frank    | Portman | 2003-04-01 | Teller       |
+|     16 | Theresa  | Markham | 2001-03-15 | Head Teller  |
+
+#### Group by and Having clauses
