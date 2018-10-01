@@ -34,6 +34,7 @@ Arithmetic operations include:
 There are many more, but those are the ones you will be using most often.
 ### Comparisons
 To compare between values you use the the operation `cmp dst, src`, followed directly by:
+
 | Operation | Meaning |
 | - | - |
 | `je` | Jump if equal |
